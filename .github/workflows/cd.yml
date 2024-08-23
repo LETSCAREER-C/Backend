@@ -21,10 +21,21 @@ jobs:
           script_stop: true
           script: |
             cd /home/ubuntu/Backend
+            
             rm -rf src/main/resources/application.yml
+            
             git pull origin main
-            echo "{{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.yml
+            
+            echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.yml
+            
+            echo "${{ secrets.APPLICATION_PROPERTIES }}" > app_property.txt
+            
+            echo "${{ secrets.SERVER_PORT }}" > server_port.txt
+            
             ./gradlew clean
+            
             ./gradlew build -x test
+            
             sudo fuser -k -n tcp "${{ secrets.SERVER_PORT }}" || true
+            
             nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
