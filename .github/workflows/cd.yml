@@ -1,15 +1,15 @@
-name: Deploy to ec2
+name: cd
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    types: [completed]
+  workflow_run:
+    workflows: ["ci"]
+    types: [ completed ]
     branches: [ "main", "dev" ]
 
 jobs:
   Deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Connect to EC2 via SSH
@@ -25,6 +25,7 @@ jobs:
           script: |
             cd /home/ubuntu/Backend
             rm -rf src/main/resources/application.yml
+            git switch main
             git pull origin main
             echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
             ./gradlew clean
