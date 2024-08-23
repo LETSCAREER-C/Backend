@@ -27,11 +27,11 @@ jobs:
             
             rm -rf src/main/resources/application.yml
             
-            git pull origin main
+            git switch dev
+            
+            git pull origin dev
             
             echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
-            echo "$APPLICATION_PROPERTIES" > app_property.txt
-            echo "${{ secrets.SERVER_PORT }}" > server_port.txt
             
             ./gradlew clean
             
