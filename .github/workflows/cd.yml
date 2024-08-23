@@ -14,9 +14,6 @@ jobs:
     steps:
       - name: Connect to EC2 via SSH
         uses: appleboy/ssh-action@master
-        env:
-          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
-          SERVER_PORT: ${{ secrets.SERVER_PORT }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
@@ -25,11 +22,9 @@ jobs:
           script: |
             cd /home/ubuntu/Backend
             rm -rf src/main/resources/application.yml
-            git switch main
             git pull origin main
-            echo "working" > ./work.log
-            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
+            echo "{{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.yml
             ./gradlew clean
             ./gradlew build -x test
-            sudo fuser -k -n tcp "$SERVER_PORT" || true
+            sudo fuser -k -n tcp "${{ secrets.SERVER_PORT }}" || true
             nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
