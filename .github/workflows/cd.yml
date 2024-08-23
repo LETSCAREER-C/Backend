@@ -25,11 +25,13 @@ jobs:
           script: |
             cd /home/ubuntu/Backend
             
-            rm -rf src/main/resources/application.yml
-            
             git switch dev
             
             git pull origin dev
+            
+            rm -rf src/main/resources/application.yml
+            
+            mkdir -p src/main/resources
             
             echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
             
