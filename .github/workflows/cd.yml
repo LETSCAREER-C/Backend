@@ -3,12 +3,10 @@ name: Deploy to ec2
 on:
   workflow_dispatch:
   push:
-    branches:
-     - main
+    branches: [ "main" ]
   pull_request:
-    branches:
-      types: [ completed ]
-      branches: [ main , dev ]
+    types: [completed]
+    branches: [ "main", "dev" ]
 
 jobs:
   Deploy:
@@ -33,4 +31,3 @@ jobs:
             ./gradlew build -x test
             sudo fuser -k -n tcp "$SERVER_PORT" || true
             nohup java -jar build/libs/*.SNAPSHOT.jar > ./output.log 2>&1 &
-            
