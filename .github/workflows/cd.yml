@@ -14,11 +14,14 @@ jobs:
     steps:
       - name: Connect to EC2 via SSH
         uses: appleboy/ssh-action@master
+        env:
+          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script_stop: true
+          envs: APPLICATION_PROPERTIES
           script: |
             cd /home/ubuntu/Backend
             
@@ -26,8 +29,8 @@ jobs:
             
             git pull origin main
             
-            echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.yml
-            echo "${{ secrets.APPLICATION_PROPERTIES }}" > app_property.txt
+            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
+            echo "$APPLICATION_PROPERTIES" > app_property.txt
             echo "${{ secrets.SERVER_PORT }}" > server_port.txt
             
             ./gradlew clean
