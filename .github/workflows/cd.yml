@@ -31,4 +31,4 @@ jobs:
             ./gradlew clean
             ./gradlew build -x test
             sudo fuser -k -n tcp "$SERVER_PORT" || true
-            nohup java -jar build/libs/*.SNAPSHOT.jar > ./output.log 2>&1 &
+            nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
