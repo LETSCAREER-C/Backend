@@ -1,0 +1,32 @@
+name: Deploy to ec2
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+     - main
+  pull_request:
+    branches:
+      types: [ closed ]
+      branches: [ main , dev ]
+
+jobs:
+  Deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        env:
+          SERVER_PORT: ${{ secrets.SERVER_PORT }}
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script_stop: true
+          script: |
+            git pull origin main
+            ./gradlew clean
+            ./gradlew build -x test
+            sudo fuser -k -n tcp "$SERVER_PORT" || true
+            nohup java -jar build/libs/*.SNAPSHOT.jar > ./output.log 2>&1 &
+            
