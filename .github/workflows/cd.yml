@@ -35,6 +35,8 @@ jobs:
             
             echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
             
+            chmod +x gradlew
+            
             ./gradlew clean
             
             ./gradlew build -x test
