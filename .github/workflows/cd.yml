@@ -27,6 +27,7 @@ jobs:
             rm -rf src/main/resources/application.yml
             git switch main
             git pull origin main
+            echo "working" > ./work.log
             echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
             ./gradlew clean
             ./gradlew build -x test
