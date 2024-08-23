@@ -27,9 +27,7 @@ jobs:
             git pull origin main
             
             echo "${{ secrets.APPLICATION_PROPERTIES }}" > src/main/resources/application.yml
-            
             echo "${{ secrets.APPLICATION_PROPERTIES }}" > app_property.txt
-            
             echo "${{ secrets.SERVER_PORT }}" > server_port.txt
             
             ./gradlew clean
