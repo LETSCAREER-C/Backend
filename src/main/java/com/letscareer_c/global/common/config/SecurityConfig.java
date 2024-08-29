@@ -23,6 +23,10 @@ public class SecurityConfig {
         http
                 .httpBasic((auth) -> auth.disable());
 
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/**").permitAll());
+
         return http.build();
     }
 }

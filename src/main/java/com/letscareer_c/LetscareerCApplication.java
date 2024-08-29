@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.util.TimeZone;
 
-@EnableJpaAuditing
 @SpringBootApplication
 public class LetscareerCApplication {
 
