@@ -20,6 +20,7 @@ public enum BaseExceptionErrorCode implements ResponseStatus {
     METHOD_NOT_ALLOWED(2002, HttpStatus.METHOD_NOT_ALLOWED.value(), "해당 URL에서는 지원하지 않는 HTTP Method 입니다."),
     INAPPROPRIATE_DATA(2003, HttpStatus.BAD_REQUEST.value(), "입력한 정보가 올바르지 않습니다."),
     NO_COOKIE(2004,HttpStatus.BAD_REQUEST.value(),"쿠키가 존재하지 않습니다."),
+    NO_REQUEST_PARAMETER(2005,HttpStatus.BAD_REQUEST.value(),"요청 파라미터는 필수로 입력해야합니다."),
 
     /**
      * 3000: Server, Database 오류 (INTERNAL_SERVER_ERROR)

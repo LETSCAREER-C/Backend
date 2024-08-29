@@ -6,8 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.TypeMismatchException;
 import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -84,6 +86,13 @@ public class BaseExceptionHandler {
     public BaseErrorResponse handle_MissingServletRequestPartException(MissingServletRequestPartException e) {
         log.error("[BaseExceptionControllerAdvice: handle_MissingServletRequestPartException 호출]", e);
         return new BaseErrorResponse(INAPPROPRIATE_DATA);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    public BaseErrorResponse handleMissingServletRequestParameterException(MissingServletRequestParameterException e) {
+        log.error("[GlobalExceptionHandler] MissingServletRequestParameterException", e);
+        return new BaseErrorResponse(NO_REQUEST_PARAMETER);
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)

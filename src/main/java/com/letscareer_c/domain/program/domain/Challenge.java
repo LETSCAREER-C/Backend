@@ -3,7 +3,6 @@ package com.letscareer_c.domain.program.domain;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.time.LocalDate;
 
