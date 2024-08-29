@@ -3,10 +3,12 @@ package com.letscareer_c.domain;
 import com.letscareer_c.infra.s3.application.S3FileService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 public class HelloController {
@@ -23,7 +25,7 @@ public class HelloController {
     }
 
     @PostMapping
-    public String imagePostTest(MultipartFile file) throws IOException {
-        return s3FileService.uploadImage(file);
+    public List<String> imagePostTest(@RequestParam("images") List<MultipartFile> imageFiles) throws IOException {
+        return s3FileService.uploadImage(imageFiles);
     }
 }
