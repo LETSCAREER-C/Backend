@@ -1,10 +1,7 @@
 package com.letscareer_c.domain;
 
 import com.letscareer_c.infra.s3.application.S3FileService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,11 +18,16 @@ public class HelloController {
 
     @GetMapping
     public String hello() {
-        return "쿼리dsl도 공부해야하는데 ㅜㅡㅜ";
+        return "우하하하 재밌눈 코딩";
     }
 
     @PostMapping
     public List<String> imagePostTest(@RequestParam("images") List<MultipartFile> imageFiles) throws IOException {
         return s3FileService.uploadImage(imageFiles);
+    }
+
+    @DeleteMapping
+    public void imageDeleteTest(@RequestParam("fileName") String fileName) {
+        s3FileService.deleteImage(fileName);
     }
 }

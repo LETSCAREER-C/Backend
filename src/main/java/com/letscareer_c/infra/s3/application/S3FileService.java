@@ -49,6 +49,15 @@ public class S3FileService {
         return fileUrls;
     }
 
+    public void deleteImage(String fileName) {
+        try {
+            amazonS3.deleteObject(bucket, fileName);
+        } catch (Exception e) {
+            log.error("S3 파일 삭제 실패", e.getMessage());
+            throw new RuntimeException("S3 파일 삭제 실패", e);
+        }
+    }
+
     private String createFileName(String originalFileName) {
         return UUID.randomUUID().toString() + "_" + originalFileName;
     }
