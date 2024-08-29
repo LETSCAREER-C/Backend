@@ -25,11 +25,14 @@ jobs:
           APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
         run: |
           cd ./src
-          mkdir main/resources
+          mkdir -p main/resources
           echo "$APPLICATION_PROPERTIES" > main/resources/application.yml
-
+          
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew build -x test
+      - name: Build with Tests
+        run: ./gradlew build
+
+      - name: Run Asciidoctor
+        run: ./gradlew asciidoctor
