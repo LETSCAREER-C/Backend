@@ -41,6 +41,8 @@ jobs:
             
             ./gradlew build -x test
             
+            ./gradlew asciidoctor
+            
             sudo fuser -k -n tcp "${{ secrets.SERVER_PORT }}" || true
             
             nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
