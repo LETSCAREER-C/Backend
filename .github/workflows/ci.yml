@@ -32,7 +32,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build with Tests
-        run: ./gradlew build -x test
+        run: ./gradlew build
 
       - name: Run Asciidoctor
         run: ./gradlew asciidoctor
