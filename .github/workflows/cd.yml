@@ -39,7 +39,7 @@ jobs:
             
             ./gradlew clean
             
-            ./gradlew build -x test
+            ./gradlew build
             
             ./gradlew asciidoctor
             
