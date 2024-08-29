@@ -1,0 +1,46 @@
+name: cd
+
+on:
+  workflow_dispatch:
+  workflow_run:
+    workflows: ["ci"]
+    types: [ completed ]
+    branches: [ "main", "dev" ]
+
+jobs:
+  Deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Connect to EC2 via SSH
+        uses: appleboy/ssh-action@master
+        env:
+          APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_PRIVATE_KEY }}
+          script_stop: true
+          envs: APPLICATION_PROPERTIES
+          script: |
+            cd /home/ubuntu/Backend
+            
+            git switch dev
+            
+            git pull origin dev
+            
+            rm -rf src/main/resources/application.yml
+            
+            mkdir -p src/main/resources
+            
+            echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
+            
+            chmod +x gradlew
+            
+            ./gradlew clean
+            
+            ./gradlew build -x test
+            
+            sudo fuser -k -n tcp "${{ secrets.SERVER_PORT }}" || true
+            
+            nohup java -jar build/libs/*SNAPSHOT.jar > ./output.log 2>&1 &
