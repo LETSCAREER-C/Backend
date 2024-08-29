@@ -23,16 +23,19 @@ jobs:
       - name: Set YML file
         env:
           APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
+          TEST_APPLICATION_PROPERTIES: ${{ secrets.TEST_APPLICATION_PROPERTIES }}
         run: |
           cd ./src
           mkdir -p main/resources
           echo "$APPLICATION_PROPERTIES" > main/resources/application.yml
-          
+          rm -rf test/resources/application.yml
+          echo "$TEST_APPLICATION_PROPERTIES" > test/resources/application.yml
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build with Tests
-        run: ./gradlew build --info --stacktrace
+        run: ./gradlew build --stacktrace
 
       - name: Run Asciidoctor
         run: ./gradlew asciidoctor
