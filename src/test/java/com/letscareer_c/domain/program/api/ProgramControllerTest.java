@@ -72,4 +72,56 @@ class ProgramControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
+<<<<<<< HEAD
+=======
+
+    @DisplayName("프로그램 리스트 조회 시 프로그램 타입은 챌린지와 클래스뿐이다.")
+    @Test
+    void getProgramListWithInvalidType() throws Exception {
+        List<String> careerTags = List.of("DOCUMENT_PREPARE");
+        List<String> programTypes = List.of("CHALL");
+
+        //when,then
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/list")
+                        .param("careerTags", careerTags.toArray(new String[0]))
+                        .param("programTypes", programTypes.toArray(new String[0]))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(String.valueOf(INVALID_REQUEST_PROGRAM_TYPE.getCode())))
+                .andExpect(jsonPath("$.status").value(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.message").value(INVALID_REQUEST_PROGRAM_TYPE.getMessage()));
+    }
+
+    @DisplayName("프로그램 리스트 조회 시 커리어타입은 서류 준비, 면접 준비, 커리어 탐색뿐이다.")
+    @Test
+    void getProgramListWithInvalidCareerTag() throws Exception {
+        //given
+        List<String> careerTags = List.of("DOCUMENT");
+        List<String> programTypes = List.of("CHALL");
+
+        //when,then
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/list")
+                        .param("careerTags", careerTags.toArray(new String[0]))
+                        .param("programTypes", programTypes.toArray(new String[0]))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value(String.valueOf(INVALID_REQUEST_CAREER_TAG.getCode())))
+                .andExpect(jsonPath("$.status").value(HttpStatus.BAD_REQUEST.value()))
+                .andExpect(jsonPath("$.message").value(INVALID_REQUEST_CAREER_TAG.getMessage()));
+    }
+
+    @DisplayName("프로그램 상세 조회 성공")
+    @Test
+    void getProgramDetail() throws Exception {
+        //given
+        Long programId = 1L;
+        String tag = "CHALLENGE";
+        //when, then
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/{tag}/{programId}",tag, programId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+>>>>>>> c64573d (feat: get program detail information by program id)
 }
