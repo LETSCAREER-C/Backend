@@ -9,6 +9,7 @@ import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 public class ProgramService {
     private final ProgramRepository programRepository;
 
+    @Cacheable(cacheNames = "getProgramList", key = "'programList:careerTag:' + #careerTag + ':programTypes:' + #programTypes + ':page:' + #page")
     public ProgramListResponse getProgramList(String careerTag, List<String> programTypes, int page) {
         PageRequest pageRequest = PageRequest.of(page,8);
         List<ProgramTypeEnum> programTypeEnums = returnProgramTypeEnums(programTypes);
