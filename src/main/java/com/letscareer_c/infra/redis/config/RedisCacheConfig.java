@@ -45,7 +45,7 @@ public class RedisCacheConfig {
                                 new GenericJackson2JsonRedisSerializer(objectMapper())
                         )
                 )
-                .entryTtl(Duration.ofMinutes(1L));
+                .entryTtl(Duration.ofDays(7L));
 
         return RedisCacheManager
                 .RedisCacheManagerBuilder
