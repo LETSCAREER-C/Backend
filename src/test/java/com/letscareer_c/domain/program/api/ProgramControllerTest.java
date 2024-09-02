@@ -1,6 +1,7 @@
 package com.letscareer_c.domain.program.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.letscareer_c.domain.program.application.ProgramDetailService;
 import com.letscareer_c.domain.program.application.ProgramService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,6 +30,8 @@ class ProgramControllerTest {
     private ObjectMapper objectMapper;
     @MockBean
     private ProgramService programService;
+    @MockBean
+    private ProgramDetailService programDetailService;
 
     @DisplayName("서류 준비 커리어 태그, 챌린티 타입의 0 페이지 프로그램 리스트를 조회한다.")
     @Test
@@ -81,9 +84,8 @@ class ProgramControllerTest {
     void getProgramDetail() throws Exception {
         //given
         Long programId = 1L;
-        String tag = "CHALLENGE";
         //when, then
-        mockMvc.perform(MockMvcRequestBuilders.get("/program/{tag}/{programId}",tag, programId)
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}", programId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
