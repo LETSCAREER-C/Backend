@@ -4,6 +4,7 @@ INSERT INTO program (
     program_title,
     program_intro,
     program_thumbnail,
+    career_tag,
     recruit_status,
     recruit_start_date,
     recruit_end_date,
@@ -21,9 +22,9 @@ INSERT INTO program (
     mobile_main_image_url
 )
 VALUES
-    (1, 'Liveclass 1', 'Intro to Liveclass 1', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 10, CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 30, 'LIVECLASS', 100, true, 'https://chat_url_1', 'password1', 50000, 1, 10000, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
-    (2, 'Liveclass 2', 'Intro to Liveclass 2', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 10, CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 30, 'LIVECLASS', 100, false, 'https://chat_url_2', 'password2', 60000, 1, 5000, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
-    (3, 'Liveclass 3', 'Intro to Liveclass 3', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 10, CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 30, 'LIVECLASS', 150, true, 'https://chat_url_3', 'password3', 70000, 2, 7000, 'https://pc_main_image_url', 'https://mobile_main_image_url');
+    (1, 'Liveclass 1', 'Intro to Liveclass 1', 'https://image_url', 'CAREER_EXPLORE','RECRUITING', CURRENT_TIMESTAMP - 10, CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 30, 'LIVECLASS', 100, true, 'https://chat_url_1', 'password1', 50000, 1, 10000, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
+    (2, 'Liveclass 2', 'Intro to Liveclass 2', 'https://image_url', 'DOCUMENT_PREPARE','RECRUITING', CURRENT_TIMESTAMP - 10, CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 30, 'LIVECLASS', 100, false, 'https://chat_url_2', 'password2', 60000, 1, 5000,'https://pc_main_image_url', 'https://mobile_main_image_url'),
+    (3, 'Liveclass 3', 'Intro to Liveclass 3', 'https://image_url', 'INTERVIEW_PREPARE','RECRUITING', CURRENT_TIMESTAMP - 10, CURRENT_TIMESTAMP + 10, CURRENT_TIMESTAMP + 1, CURRENT_TIMESTAMP + 30, 'LIVECLASS', 150, true, 'https://chat_url_3', 'password3', 70000, 2, 7000, 'https://pc_main_image_url', 'https://mobile_main_image_url');
 
 -- Insert Challenge records
 INSERT INTO program (
@@ -31,6 +32,7 @@ INSERT INTO program (
     program_title,
     program_intro,
     program_thumbnail,
+    career_tag,
     recruit_status,
     recruit_start_date,
     recruit_end_date,
@@ -49,29 +51,11 @@ INSERT INTO program (
     mobile_main_image_url
 )
 VALUES
-    (4, 'Challenge 1', 'Intro to Challenge 1', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 200, true, 'https://chat_url_4', 'password4', 80000, 1, 15000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
-    (5, 'Challenge 2', 'Intro to Challenge 2', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 250, false, 'https://chat_url_5', 'password5', 90000, 1, 20000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
-    (6, 'Challenge 3', 'Intro to Challenge 3', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 300, true, 'https://chat_url_6', 'password6', 100000, 2, 25000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
-    (7, 'Challenge 4', 'Intro to Challenge 4', 'https://image_url', 'RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 350, false, 'https://chat_url_7', 'password7', 110000, 2, 30000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url');
+    (4, 'Challenge 1', 'Intro to Challenge 1', 'https://image_url', 'CAREER_EXPLORE','RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 200, true, 'https://chat_url_4', 'password4', 80000, 1, 15000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
+    (5, 'Challenge 2', 'Intro to Challenge 2', 'https://image_url', 'DOCUMENT_PREPARE','RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 250, false, 'https://chat_url_5', 'password5', 90000, 1, 20000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
+    (6, 'Challenge 3', 'Intro to Challenge 3', 'https://image_url', 'DOCUMENT_PREPARE','RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 300, true, 'https://chat_url_6', 'password6', 100000, 2, 25000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url'),
+    (7, 'Challenge 4', 'Intro to Challenge 4', 'https://image_url', 'INTERVIEW_PREPARE','RECRUITING', CURRENT_TIMESTAMP - 15, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 5, CURRENT_TIMESTAMP + 20, 'CHALLENGE', 350, false, 'https://chat_url_7', 'password7', 110000, 2, 30000, CURRENT_TIMESTAMP + 23, 'https://pc_main_image_url', 'https://mobile_main_image_url');
 
--- Insert tags for Liveclass records
-INSERT INTO program_career_tag (program_id, career_tag)
-VALUES
-    (1, 'CAREER_EXPLORE'),
-    (1, 'DOCUMENT_PREPARE'),
-    (2, 'CAREER_EXPLORE'),
-    (2, 'DOCUMENT_PREPARE'),
-    (3, 'CAREER_EXPLORE');
-
--- Insert tags for Challenge records
-INSERT INTO program_career_tag (program_id, career_tag)
-VALUES
-    (4, 'DOCUMENT_PREPARE'),
-    (4, 'INTERVIEW_PREPARE'),
-    (5, 'DOCUMENT_PREPARE'),
-    (6, 'CAREER_EXPLORE'),
-    (7, 'DOCUMENT_PREPARE'),
-    (7, 'INTERVIEW_PREPARE');
 
 -- Insert Member records
 INSERT INTO member (id, name)
@@ -175,14 +159,14 @@ VALUES
     (3, 'https://image_url_3', 3, 1);
 
 -- Insert Description records
-INSERT INTO description (id, title, content, image_type_image_url, template_type, order_number, program_id)
+INSERT INTO description (id, title, content, image_type_image_url, tags, template_type, order_number, program_id)
 VALUES
-    (1, 'Description for Liveclass 1', 'Detailed description of Liveclass 1', '', 'TYPE_A', 1, 1),
-    (2, 'Description for Liveclass 2', 'Detailed description of Liveclass 2', '', 'TYPE_A', 2, 1),
-    (3, 'Description for Liveclass 3', 'Detailed description of Liveclass 3', '', 'TYPE_A', 3, 1),
-    (5, 'Description for Challenge 2', 'Detailed description of Challenge 2', 'https://desc_image_url_5', 'image', 2, 1),
-    (6, 'Description for Challenge 3', 'Detailed description of Challenge 3', 'https://desc_image_url_6', 'image', 3, 1),
-    (7, 'Description for Challenge 4', 'Detailed description of Challenge 4', 'https://desc_image_url_7', 'image', 4, 1);
+    (1, 'Description for Liveclass 1', 'Detailed description of Liveclass 1', '', '["Tag1", "Tag2", "Tag3", "Tag4"]' ,'TYPE_A', 1, 1),
+    (2, 'Description for Liveclass 2', 'Detailed description of Liveclass 2', '', '["Tag1", "Tag2", "Tag3", "Tag4"]','TYPE_A', 2, 1),
+    (3, 'Description for Liveclass 3', 'Detailed description of Liveclass 3', '', '["Tag1", "Tag2", "Tag3", "Tag4"]','TYPE_A', 3, 1),
+    (5, 'Description for Challenge 2', 'Detailed description of Challenge 2', 'https://desc_image_url_5', '',  'image', 2, 1),
+    (6, 'Description for Challenge 3', 'Detailed description of Challenge 3', 'https://desc_image_url_6', '', 'image', 3, 1),
+    (7, 'Description for Challenge 4', 'Detailed description of Challenge 4', 'https://desc_image_url_7', '','image', 4, 1);
 
 
 -- Insert DescriptionImage records

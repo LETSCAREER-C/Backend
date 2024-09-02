@@ -4,11 +4,8 @@ import com.letscareer_c.docs.RestDocsSupport;
 import com.letscareer_c.domain.program.api.ProgramController;
 import com.letscareer_c.domain.program.application.ProgramDetailService;
 import com.letscareer_c.domain.program.application.ProgramService;
-<<<<<<< HEAD
 import com.letscareer_c.domain.program.application.response.ProgramDto;
-=======
 import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
->>>>>>> c64573d (feat: get program detail information by program id)
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import com.letscareer_c.domain.program.dao.curriculum.dto.CurriculumDto;
 import com.letscareer_c.domain.program.dao.description.dto.DescriptionDto;
@@ -29,6 +26,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -255,6 +253,11 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 DescriptionDto.builder()
                         .title("Description 1")
                         .content("Description 1 Content")
+                        .tags(List.of(
+                                "tag1",
+                                "tag2",
+                                "tag3"
+                        ))
                         .order(1)
                         .templateType("blue")
                         .descriptionImages(List.of(
@@ -275,6 +278,11 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 DescriptionDto.builder()
                         .title("Description 2")
                         .content("Description 2 Content")
+                        .tags(List.of(
+                                "tag1",
+                                "tag2",
+                                "tag3"
+                        ))
                         .order(2)
                         .templateType("blue")
                         .descriptionImages(List.of(
@@ -391,6 +399,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.description[].title").type(JsonFieldType.STRING).description("Description 제목"),
                                 fieldWithPath("result.description[].content").type(JsonFieldType.STRING).description("Description 내용"),
                                 fieldWithPath("result.description[].order").type(JsonFieldType.NUMBER).description("Description 순서"),
+                                fieldWithPath("result.description[].tags").type(JsonFieldType.ARRAY).description("Description 태그"),
                                 fieldWithPath("result.description[].templateType").type(JsonFieldType.STRING).description("Description 템플릿 타입"),
                                 fieldWithPath("result.description[].descriptionImages[].imageUrl").type(JsonFieldType.STRING).description("Description 이미지 URL"),
                                 fieldWithPath("result.description[].descriptionImages[].order").type(JsonFieldType.NUMBER).description("Description 이미지 순서"),
@@ -406,11 +415,11 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
                                 fieldWithPath("result.latestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.latestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
-                                fieldWithPath("result.latestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 점수"),
+                                fieldWithPath("result.latestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
 
                                 fieldWithPath("result.bestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.bestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
-                                fieldWithPath("result.bestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 점수"),
+                                fieldWithPath("result.bestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
 
                                 fieldWithPath("result.recommendedPrograms[].programId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),
                                 fieldWithPath("result.recommendedPrograms[].tag").type(JsonFieldType.STRING).description("추천 프로그램 태그"),

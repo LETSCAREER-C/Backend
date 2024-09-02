@@ -54,7 +54,7 @@ public class RepositoryTest {
         // GIVEN
 
         // WHEN
-        List<com.letscareer_c.domain.program.domain.Description> descriptions = descriptionRepository.findByProgramId(1L);
+        List<Description> descriptions = descriptionRepository.findByProgramId(1L);
 
         // THEN
         assertThat(descriptions).isNotNull();

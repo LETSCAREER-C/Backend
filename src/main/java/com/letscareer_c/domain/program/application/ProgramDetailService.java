@@ -98,7 +98,7 @@ public class ProgramDetailService {
         return ProgramDetailResponse.builder()
                 .title(program.getTitle())
                 .recruitEndDate(program.getRecruitEndDate())
-                .tag(program.getTags().get(0).name())
+                .tag(program.getTag().name())
                 .pcMainImageUrl(program.getPcMainImageUrl())
                 .mobileMainImageUrl(program.getMobileMainImageUrl())
                 .description(description)

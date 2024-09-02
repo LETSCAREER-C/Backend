@@ -19,23 +19,8 @@ spring:
     generate-ddl: true
   sql:
     init:
-      data-locations: classpath:data_ho0.sql
+      data-locations: classpath:data.sql
       mode: always
 logging:
   level:
     org.hibernate.SQL: debug
-
----
-
-cloud:
-  aws:
-    s3:
-      bucket: letmec-static-files
-    credentials:
-      access-key: AKIA5CBDRIFCYAQHDFFD
-      secret-key: Jzh1aRrwcAsdfdGtDzfwefdf079rbWOWdDQHI2rpPXDWl
-    region:
-      static: ap-northeast-2
-      auto: false
-    stack:
-      auto: false

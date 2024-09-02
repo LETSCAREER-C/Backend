@@ -20,6 +20,8 @@ public class Description extends BaseEntity {
 
     private String imageTypeImageUrl;
 
+    private String tags; // tags만 따로 변경이 발생하지 않으므로 String으로 처리
+
     @NotNull
     private String templateType; // 나중에 enum으로 변경
 
