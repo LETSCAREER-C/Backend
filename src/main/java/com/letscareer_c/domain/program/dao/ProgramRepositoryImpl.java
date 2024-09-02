@@ -1,14 +1,17 @@
 package com.letscareer_c.domain.program.dao;
 
-import com.letscareer_c.domain.program.dao.dto.ProgramDto;
 import com.letscareer_c.domain.program.domain.Program;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
-import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.support.PageableExecutionUtils;
 
 import java.util.List;
 
@@ -23,29 +26,35 @@ public class ProgramRepositoryImpl implements ProgramRepositoryCustom{
         this.jpaQueryFactory = new JPAQueryFactory(em);
     }
 
-    //TODO: Challenge인 경우, otDate를 가져올 수 있는 방법 고려 필요(부모인 Program에는 otDate 필드가 없으므로)
-    //TODO: Repository 테스트 시 태그 관련 중복으로 데이터가 읽어와져서 그냥 Program 자체를 읽어옴. 근본적인 해결책이 필요.
     @Override
-    public List<Program> findByCondition(List<CareerTagEnum> careerTagEnums, List<ProgramTypeEnum> programTypeEnums) {
-        List<Program> programs = jpaQueryFactory
+    public Page<Program> findByCondition(CareerTagEnum careerTagEnum, List<ProgramTypeEnum> programTypeEnums,
+                                         Pageable pageable) {
+        //TODO: Challenge인 경우, otDate를 가져올 수 있는 방법 고려 필요(부모인 Program에는 otDate 필드가 없으므로)
+        //TODO: Repository 테스트 시 태그 관련 중복으로 데이터가 읽어와져서 그냥 Program 자체를 읽어옴. 추후에 ProgramDto 로 변경 필요
+        List<Program> content = jpaQueryFactory
                 .selectFrom(program)
-                .where(programTypeEq(programTypeEnums), programCareerTagEq(careerTagEnums))
+                .where(programTypeEq(programTypeEnums),
+                        programCareerTagEq(careerTagEnum)) //동적쿼리로 태그 전체보기 혹은 하나만 선택 해결
+                .offset(pageable.getOffset())
+                .limit(pageable.getPageSize())
                 .fetch();
-        return programs;
+
+        JPAQuery<Long> countQuery = jpaQueryFactory
+                .select(program.count())
+                .from(program)
+                .where(programTypeEq(programTypeEnums),
+                        programCareerTagEq(careerTagEnum));
+
+        return PageableExecutionUtils.getPage(content,pageable,()->countQuery.fetchOne());
+    }
+
+    private BooleanExpression programCareerTagEq(CareerTagEnum careerTagEnum) {
+        if(careerTagEnum==null) return null;
+        return program.tag.eq(careerTagEnum);
     }
 
     private BooleanExpression programTypeEq(List<ProgramTypeEnum> programTypes) {
         //항상 필터링 조건이 들어오므로 null 조건 생략
         return program.dtype.in(programTypes);
-    }
-
-    private BooleanExpression programCareerTagEq(List<CareerTagEnum> careerTags) {
-        BooleanExpression predicate = program.tags.any().eq(careerTags.get(0));
-
-        for (int i = 1; i < careerTags.size(); i++) {
-            predicate = predicate.or(program.tags.any().eq(careerTags.get(i)));
-        }
-
-        return predicate;
     }
 }
