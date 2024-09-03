@@ -165,16 +165,29 @@ VALUES
     (3, 'https://image_url_3', 3, 1);
 
 -- Insert Description records
-INSERT INTO description (id, title, content, image_type_image_url, tags, template_type, order_number, program_id)
+INSERT INTO description (id, title, content, image_type_image_url, template_type, order_number, program_id)
 VALUES
-    (1, 'Description for Liveclass 1', 'Detailed description of Liveclass 1', '', '["Tag1", "Tag2", "Tag3", "Tag4"]' ,'TYPE_A', 1, 1),
-    (2, 'Description for Liveclass 2', 'Detailed description of Liveclass 2', '', '["Tag1", "Tag2", "Tag3", "Tag4"]','TYPE_A', 2, 1),
-    (3, 'Description for Liveclass 3', 'Detailed description of Liveclass 3', '', '["Tag1", "Tag2", "Tag3", "Tag4"]','TYPE_A', 3, 1),
-    (5, 'Description for Challenge 2', 'Detailed description of Challenge 2', 'https://desc_image_url_5', '',  'image', 2, 1),
-    (6, 'Description for Challenge 3', 'Detailed description of Challenge 3', 'https://desc_image_url_6', '', 'image', 3, 1),
-    (7, 'Description for Challenge 4', 'Detailed description of Challenge 4', 'https://desc_image_url_7', '','image', 4, 1);
+    (1, 'Description for Liveclass 1', 'Detailed description of Liveclass 1', '',  'TYPE_A', 1, 1),
+    (2, 'Description for Liveclass 2', 'Detailed description of Liveclass 2', '',  'TYPE_A', 2, 1),
+    (3, 'Description for Liveclass 3', 'Detailed description of Liveclass 3', '',  'TYPE_A', 3, 1),
+    (5, 'Description for Challenge 2', 'Detailed description of Challenge 2', 'https://desc_image_url_5', 'image', 2, 1),
+    (6, 'Description for Challenge 3', 'Detailed description of Challenge 3', 'https://desc_image_url_6', 'image', 3, 1),
+    (7, 'Description for Challenge 4', 'Detailed description of Challenge 4', 'https://desc_image_url_7', 'image', 4, 1);
 
-
+INSERT INTO hashtag (id, hashtag,order_number, description_id)
+VALUES
+    (1, 'Tag1', 1 ,1),
+    (2, 'Tag2', 2 ,1),
+    (3, 'Tag3', 3 ,1),
+    (4, 'Tag4', 4 ,1),
+    (5, 'Tag1', 1 ,2),
+    (6, 'Tag2', 2 ,2),
+    (7, 'Tag3', 3 ,2),
+    (8, 'Tag4', 4 ,2),
+    (9, 'Tag1', 1 ,3),
+    (10, 'Tag2',2 ,3),
+    (11, 'Tag3',3 ,3),
+    (12, 'Tag4',4 ,3);
 -- Insert DescriptionImage records
 INSERT INTO description_image (
     id,

@@ -17,7 +17,7 @@ public class DescriptionDto {
     private String title;
     private String content;
     private int order;
-    private List<String> tags;
+    private List<HashtagDto> hashtags;
     private String templateType;
     private List<DescriptionImageDto> descriptionImages;
 }

@@ -1,7 +1,6 @@
 package com.letscareer_c.domain.program.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.letscareer_c.domain.program.application.ProgramDetailService;
 import com.letscareer_c.domain.program.application.ProgramService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -9,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.List;
 
-import static com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode.INVALID_REQUEST_PROGRAM_TYPE;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,8 +27,6 @@ class ProgramControllerTest {
     private ObjectMapper objectMapper;
     @MockBean
     private ProgramService programService;
-    @MockBean
-    private ProgramDetailService programDetailService;
 
     @DisplayName("서류 준비 커리어 태그, 챌린티 타입의 0 페이지 프로그램 리스트를 조회한다.")
     @Test

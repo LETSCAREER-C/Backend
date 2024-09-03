@@ -2,21 +2,20 @@ package com.letscareer_c.docs.program;
 
 import com.letscareer_c.docs.RestDocsSupport;
 import com.letscareer_c.domain.program.api.ProgramController;
-import com.letscareer_c.domain.program.application.ProgramDetailService;
 import com.letscareer_c.domain.program.application.ProgramService;
-import com.letscareer_c.domain.program.application.response.ProgramDto;
 import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
+import com.letscareer_c.domain.program.application.response.ProgramDto;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import com.letscareer_c.domain.program.dao.curriculum.dto.CurriculumDto;
 import com.letscareer_c.domain.program.dao.description.dto.DescriptionDto;
 import com.letscareer_c.domain.program.dao.description.dto.DescriptionImageDto;
+import com.letscareer_c.domain.program.dao.description.dto.HashtagDto;
 import com.letscareer_c.domain.program.dao.faq.dto.FaqDto;
 import com.letscareer_c.domain.program.dao.hooking.dto.HookingDto;
 import com.letscareer_c.domain.program.dao.hooking.dto.HookingImageDto;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
 import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
-import com.letscareer_c.domain.program.domain.Curriculum;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.domain.tag.RecruitStatus;
@@ -43,10 +42,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class ProgramControllerDocsTest extends RestDocsSupport{
     private final ProgramService programService = mock(ProgramService.class);
-    private final ProgramDetailService programDetailService = mock(ProgramDetailService.class);
     @Override
     protected Object initController() {
-        return new ProgramController(programService, programDetailService);
+        return new ProgramController(programService);
     }
 
 
@@ -253,11 +251,26 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 DescriptionDto.builder()
                         .title("Description 1")
                         .content("Description 1 Content")
-                        .tags(List.of(
-                                "tag1",
-                                "tag2",
-                                "tag3"
-                        ))
+                        .hashtags(
+                                List.of(
+                                        HashtagDto.builder()
+                                                .hashtag("tag1")
+                                                .order(1)
+                                                .build(),
+                                        HashtagDto.builder()
+                                                .hashtag("tag2")
+                                                .order(2)
+                                                .build(),
+                                        HashtagDto.builder()
+                                                .hashtag("tag3")
+                                                .order(3)
+                                                .build(),
+                                        HashtagDto.builder()
+                                                .hashtag("tag4")
+                                                .order(4)
+                                                .build()
+                                )
+                        )
                         .order(1)
                         .templateType("blue")
                         .descriptionImages(List.of(
@@ -278,11 +291,26 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 DescriptionDto.builder()
                         .title("Description 2")
                         .content("Description 2 Content")
-                        .tags(List.of(
-                                "tag1",
-                                "tag2",
-                                "tag3"
-                        ))
+                        .hashtags(
+                                List.of(
+                                        HashtagDto.builder()
+                                                .hashtag("tag1")
+                                                .order(1)
+                                                .build(),
+                                        HashtagDto.builder()
+                                                .hashtag("tag2")
+                                                .order(2)
+                                                .build(),
+                                        HashtagDto.builder()
+                                                .hashtag("tag3")
+                                                .order(3)
+                                                .build(),
+                                        HashtagDto.builder()
+                                                .hashtag("tag4")
+                                                .order(4)
+                                                .build()
+                                )
+                        )
                         .order(2)
                         .templateType("blue")
                         .descriptionImages(List.of(
@@ -343,7 +371,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .build()
         );
 
-        given(programDetailService.getProgramDetail(programId))
+        given(programService.getProgramDetail(programId))
                 .willReturn(ProgramDetailResponse.builder()
                         .title("Program 1")
                         .recruitEndDate(LocalDateTime.now().plusDays(15))
@@ -399,10 +427,12 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.description[].title").type(JsonFieldType.STRING).description("Description 제목"),
                                 fieldWithPath("result.description[].content").type(JsonFieldType.STRING).description("Description 내용"),
                                 fieldWithPath("result.description[].order").type(JsonFieldType.NUMBER).description("Description 순서"),
-                                fieldWithPath("result.description[].tags").type(JsonFieldType.ARRAY).description("Description 태그"),
+                                fieldWithPath("result.description[].hashtags[].hashtag").type(JsonFieldType.STRING).description("Description 해시태그"),
+                                fieldWithPath("result.description[].hashtags[].order").type(JsonFieldType.NUMBER).description("해시태그 순서"),
                                 fieldWithPath("result.description[].templateType").type(JsonFieldType.STRING).description("Description 템플릿 타입"),
                                 fieldWithPath("result.description[].descriptionImages[].imageUrl").type(JsonFieldType.STRING).description("Description 이미지 URL"),
                                 fieldWithPath("result.description[].descriptionImages[].order").type(JsonFieldType.NUMBER).description("Description 이미지 순서"),
+
 
                                 fieldWithPath("result.lecturer.name").type(JsonFieldType.STRING).description("연사 이름"),
                                 fieldWithPath("result.lecturer.career").type(JsonFieldType.STRING).description("연사 경력"),

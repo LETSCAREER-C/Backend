@@ -14,7 +14,7 @@ public enum ProgramExceptionErrorCode implements ResponseStatus {
     INVALID_REQUEST_CAREER_TAG(4000, HttpStatus.BAD_REQUEST.value(), "Program List 조회: 올바른 커리어 태그 값을 입력해야 합니다."),
     INVALID_REQUEST_PROGRAM_TYPE(4001, HttpStatus.BAD_REQUEST.value(), "Program List 조회: 올바른 프로그램 타입 값을 입력해야 합니다."),
     // 존재하지 않는 프로그램 에러 반환
-    NOT_FOUND_PROGRAM(4002, HttpStatus.NOT_FOUND.value(), "존재하지 않는 프로그램입니다.");
+    PROGRAM_NOT_FOUND(4002, HttpStatus.NOT_FOUND.value(), "존재하지 않는 프로그램입니다.");
 
     private final int code;
     private final int status;
