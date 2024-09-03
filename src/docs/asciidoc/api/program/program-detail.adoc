@@ -1,0 +1,10 @@
+[[get-program-detail]]
+=== 프로그램 상세정보 조회
+
+==== HTTP Request
+include::{snippets}/get-program-detail/http-request.adoc[]
+include::{snippets}/get-program-detail/httpie-request.adoc[]
+
+==== HTTP Response
+include::{snippets}/get-program-detail/http-response.adoc[]
+include::{snippets}/get-program-detail/response-fields.adoc[]
