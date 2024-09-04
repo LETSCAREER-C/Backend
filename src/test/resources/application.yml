@@ -17,10 +17,34 @@ spring:
       hibernate:
         format_sql: true
     generate-ddl: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
   sql:
     init:
       data-locations: classpath:data.sql
       mode: always
+  cors:
+    allowed:
+      origin: "http://localhost:5173"
+
+
 logging:
   level:
     org.hibernate.SQL: debug
+
+---
+
+cloud:
+  aws:
+    s3:
+      bucket: letmec-static-files
+    credentials:
+      access-key: AKIA5CBDRIFCYAQHDFFD
+      secret-key: Jzh1aRrwcAsdfdGtDzfwefdf079rbWOWdDQHI2rpPXDWl
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false

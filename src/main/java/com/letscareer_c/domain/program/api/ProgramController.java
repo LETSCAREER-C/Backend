@@ -1,6 +1,7 @@
 package com.letscareer_c.domain.program.api;
 
 import com.letscareer_c.domain.program.application.ProgramService;
+import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import com.letscareer_c.global.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
@@ -26,5 +27,14 @@ public class ProgramController {
                                                                    @RequestParam int page) {
         ProgramListResponse response = programService.getProgramList(careerTag,programTypes,page);
         return new BaseResponse<>(response);
+    }
+
+    /**
+     * 프로그램 상세 조회 API
+     */
+    @GetMapping("/{programId}")
+    public BaseResponse<ProgramDetailResponse> getChallengeProgramDetail(@PathVariable Long programId){
+            ProgramDetailResponse response = programService.getProgramDetail(programId);
+            return new BaseResponse<>(response);
     }
 }

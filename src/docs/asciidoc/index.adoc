@@ -13,3 +13,4 @@ endif::[]
 == Program API
 
 include::api/program/program.adoc[]
+include::api/program/program-detail.adoc[]
