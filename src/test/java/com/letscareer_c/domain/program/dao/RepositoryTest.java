@@ -100,7 +100,7 @@ public class RepositoryTest {
 
         // THEN
         assertThat(allReviews).isNotNull();
-        assertThat(allReviews.size()).isEqualTo(2);
+        assertThat(allReviews.size()).isEqualTo(7);
     }
 
     // FAQ 조회 테스트

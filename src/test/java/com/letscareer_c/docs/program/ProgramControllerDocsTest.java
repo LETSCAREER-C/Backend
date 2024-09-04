@@ -18,6 +18,7 @@ import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedPro
 import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
+import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;
 import com.letscareer_c.domain.program.domain.tag.RecruitStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -228,6 +229,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 HookingDto.builder()
                         .order(1)
                         .title("Hooking 1")
+                        .preTitle("Hooking 1 PreTitle")
+                        .tagTitle("Hooking 1 TagTitle")
                         .content("Hooking 1 Content")
                         .order(1)
                         .templateType("blue")
@@ -331,25 +334,34 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
         );
         LecturerDto lecturerDto = LecturerDto.builder()
                 .name("Lecturer 1")
+                .nickname("Lecturer 1 Nickname")
+                .introduce("Lecturer 1 Introduce")
                 .career("Lecturer 1 Career")
                 .profileImage("https://profile-image.com")
                 .templateType("blue")
                 .build();
+
         List<ReviewDto> latestReviews = List.of(
                 ReviewDto.builder()
                         .content("Review 1 Content")
                         .grade(4)
                         .userName("Review 1 User")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
                         .content("Review 2 Content")
                         .grade(4)
                         .userName("Review 2 Nickname")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
                         .content("Review 3 Content")
                         .grade(3)
                         .userName("Review 3 Nickname")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .date(LocalDate.now())
                         .build()
         );
 
@@ -358,16 +370,22 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .content("Review 1 Content")
                         .grade(5)
                         .userName("Review 1 User")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
                         .content("Review 2 Content")
                         .grade(5)
                         .userName("Review 2 Nickname")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
                         .content("Review 3 Content")
                         .grade(4)
                         .userName("Review 3 Nickname")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .date(LocalDate.now())
                         .build()
         );
 
@@ -375,7 +393,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 .willReturn(ProgramDetailResponse.builder()
                         .title("Program 1")
                         .recruitEndDate(LocalDateTime.now().plusDays(15))
-                        .tag(CareerTagEnum.DOCUMENT_PREPARE.name())
+                        .stepType(CareerTagEnum.DOCUMENT_PREPARE)
+                        .programType(ProgramTypeEnum.CHALLENGE)
                         .pcMainImageUrl("https://main-image.com")
                         .mobileMainImageUrl("https://main-image.com")
                         .description(descriptionDtoList)
@@ -404,7 +423,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("메시지"),
                                 fieldWithPath("result").type(JsonFieldType.OBJECT).description("응답 데이터"),
                                 fieldWithPath("result.title").type(JsonFieldType.STRING).description("프로그램 제목"),
-                                fieldWithPath("result.tag").type(JsonFieldType.STRING).description("프로그램 태그"),
+                                fieldWithPath("result.stepType").type(JsonFieldType.STRING).description("프로그램 태그 (CAREER_EXPLORE, DOCUMENT_PREPARE, INTERVIEW_PREPARE 중 1개)"),
+                                fieldWithPath("result.programType").type(JsonFieldType.STRING).description("프로그램 타입 (CHALLENGE 혹은 LIVECLASS)"),
                                 fieldWithPath("result.recruitEndDate").type(JsonFieldType.ARRAY).description("모집 마감 날짜"),
                                 fieldWithPath("result.pcMainImageUrl").type(JsonFieldType.STRING).description("PC 메인 이미지 URL"),
                                 fieldWithPath("result.mobileMainImageUrl").type(JsonFieldType.STRING).description("Mobile 메인 이미지 URL"),
@@ -418,6 +438,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.faq").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(FAQ)"),
 
                                 fieldWithPath("result.hooking[].title").type(JsonFieldType.STRING).description("Hooking 제목"),
+                                fieldWithPath("result.hooking[].preTitle").type(JsonFieldType.STRING).description("Hooking 서브 제목"),
+                                fieldWithPath("result.hooking[].tagTitle").type(JsonFieldType.STRING).description("Hooking 태그 제목"),
                                 fieldWithPath("result.hooking[].content").type(JsonFieldType.STRING).description("Hooking 내용"),
                                 fieldWithPath("result.hooking[].order").type(JsonFieldType.NUMBER).description("Hooking 순서"),
                                 fieldWithPath("result.hooking[].templateType").type(JsonFieldType.STRING).description("Hooking 템플릿 타입"),
@@ -436,8 +458,11 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
                                 fieldWithPath("result.lecturer.name").type(JsonFieldType.STRING).description("연사 이름"),
                                 fieldWithPath("result.lecturer.career").type(JsonFieldType.STRING).description("연사 경력"),
+                                fieldWithPath("result.lecturer.nickname").type(JsonFieldType.STRING).description("연사 닉네임"),
+                                fieldWithPath("result.lecturer.introduce").type(JsonFieldType.STRING).description("연사 소개"),
                                 fieldWithPath("result.lecturer.profileImage").type(JsonFieldType.STRING).description("연사 프로필 이미지 URL"),
                                 fieldWithPath("result.lecturer.templateType").type(JsonFieldType.STRING).description("연사 템플릿 타입"),
+
 
                                 fieldWithPath("result.curriculum[].order").type(JsonFieldType.STRING).description("커리큘럼 순서"),
                                 fieldWithPath("result.curriculum[].title").type(JsonFieldType.STRING).description("커리큘럼 제목"),
@@ -446,10 +471,14 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.latestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.latestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.latestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
+                                fieldWithPath("result.latestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
+                                fieldWithPath("result.latestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.bestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.bestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.bestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
+                                fieldWithPath("result.bestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
+                                fieldWithPath("result.bestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.recommendedPrograms[].programId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),
                                 fieldWithPath("result.recommendedPrograms[].tag").type(JsonFieldType.STRING).description("추천 프로그램 태그"),

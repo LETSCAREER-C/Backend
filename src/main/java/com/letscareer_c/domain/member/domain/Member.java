@@ -26,7 +26,7 @@ public class Member extends BaseEntity {
     private String dreamWorkField; // 희망 직종
 
     @NotNull
-    private int year; // 학년
+    private int academic_year; // 학년
 
     @NotNull
     private String major; // 전공
