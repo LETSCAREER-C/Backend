@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class DescriptionTypeImageDto {
-    private String imageTypeImageUrl;
+    private String imageUrl;
     private String templateType;
 }

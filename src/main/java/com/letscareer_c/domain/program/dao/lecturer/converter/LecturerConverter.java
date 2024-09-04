@@ -7,6 +7,8 @@ public class LecturerConverter {
     public static LecturerDto toLecturerDto(Lecturer lecturer) {
         return LecturerDto.builder()
                 .name(lecturer.getName())
+                .nickname(lecturer.getNickname())
+                .introduce(lecturer.getIntroduce())
                 .career(lecturer.getCareer())
                 .profileImage(lecturer.getImageUrl())
                 .templateType(lecturer.getTemplateType())

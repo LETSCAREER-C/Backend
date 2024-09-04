@@ -25,6 +25,10 @@ spring:
     init:
       data-locations: classpath:data.sql
       mode: always
+  cors:
+    allowed:
+      origin: "http://localhost:5173"
+
 
 logging:
   level:

@@ -2,6 +2,7 @@ package com.letscareer_c.domain.program.application;
 
 import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
+import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
@@ -98,14 +99,16 @@ class ProgramServiceTest {
     void getProgramDetail() {
         // given
         Long programId = 1L;
-        String tag = CareerTagEnum.CAREER_EXPLORE.name();
+        CareerTagEnum tag = CareerTagEnum.CAREER_EXPLORE;
+        ProgramTypeEnum programType = ProgramTypeEnum.LIVECLASS;
         // when
         ProgramDetailResponse response = programService.getProgramDetail(programId);
 
         // then
         AssertionsForClassTypes.assertThat(response).isNotNull();
         AssertionsForClassTypes.assertThat(response.getTitle()).isEqualTo("Liveclass 1");
-        AssertionsForClassTypes.assertThat(response.getTag()).isEqualTo(tag);
+        AssertionsForClassTypes.assertThat(response.getStepType()).isEqualTo(tag);
+        AssertionsForClassTypes.assertThat(response.getProgramType()).isEqualTo(programType);
 
         AssertionsForClassTypes.assertThat(response.getRecruitEndDate()).isNotNull();
         AssertionsForClassTypes.assertThat(response.getRecruitEndDate()).isInstanceOf(LocalDateTime.class);

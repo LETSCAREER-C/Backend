@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LecturerDto {
     private String name;
+    private String nickname;
+    private String introduce;
     private String career;
     private String profileImage;
     private String templateType;

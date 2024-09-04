@@ -11,11 +11,13 @@ public class HookingConverter {
         if(hooking.getTemplateType().equals("image")) {
             return HookingTypeImageDto.builder()
                     .templateType(hooking.getTemplateType())
-                    .imageTypeImageUrl(hooking.getImageTypeImageUrl())
+                    .imageUrl(hooking.getImageUrl())
                     .build();
         } else { // templateType이 image가 아닌 경우, imageUrl, title, content 모두 보내주기
             return HookingDto.builder()
                     .title(hooking.getTitle())
+                    .preTitle(hooking.getPreTitle())
+                    .tagTitle(hooking.getTagTitle())
                     .content(hooking.getContent())
                     .order(hooking.getOrderNumber())
                     .templateType(hooking.getTemplateType())

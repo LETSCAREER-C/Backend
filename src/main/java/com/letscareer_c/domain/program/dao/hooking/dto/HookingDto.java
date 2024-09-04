@@ -14,6 +14,8 @@ import java.util.List;
 @Builder
 public class HookingDto {
     private String title;
+    private String preTitle;
+    private String tagTitle;
     private String content;
     private int order;
     private String templateType;

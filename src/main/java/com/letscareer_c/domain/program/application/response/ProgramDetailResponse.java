@@ -5,6 +5,8 @@ import com.letscareer_c.domain.program.dao.faq.dto.FaqDto;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
 import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
+import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
+import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,8 +19,8 @@ import java.util.List;
 @AllArgsConstructor
 public class ProgramDetailResponse {
     private String title;
-    // tag 넣어야함 (CareerTagEnum)
-    private String tag;
+    private CareerTagEnum stepType;
+    private ProgramTypeEnum programType;
     private LocalDateTime recruitEndDate;
     private String pcMainImageUrl;
     private String mobileMainImageUrl;

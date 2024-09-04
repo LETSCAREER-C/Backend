@@ -64,29 +64,29 @@ VALUES
     (14, 'Challenge 8', 'Intro to Challenge 8', 'https://image_url', 'INTERVIEW_PREPARE','RECRUITING', CURRENT_TIMESTAMP - 16, CURRENT_TIMESTAMP + 6, CURRENT_TIMESTAMP + 9, CURRENT_TIMESTAMP + 23, 'CHALLENGE', 370, false, 'https://chat_url_14', 'password14', 115000, 1, 32000, CURRENT_TIMESTAMP + 24, 'https://pc_main_image_url', 'https://mobile_main_image_url');
 
 -- Insert Member records
-INSERT INTO member (id, name)
+INSERT INTO member (id, name, dream_company, dream_work_field, major, academic_year)
 VALUES
-    (1, 'Member 1'),
-    (2, 'Member 2'),
-    (3, 'Member 3'),
-    (4, 'Member 4'),
-    (5, 'Member 5'),
-    (6, 'Member 6'),
-    (7, 'Member 7'),
-    (8, 'Member 8'),
-    (9, 'Member 9'),
-    (10, 'Member 10');
+    (1, 'Member 1', 'Company 1', 'Field 1', 'Major 1', 3),
+    (2, 'Member 2', 'Company 2', 'Field 2', 'Major 2', 4),
+    (3, 'Member 3', 'Company 3', 'Field 3', 'Major 3', 2),
+    (4, 'Member 4', 'Company 4', 'Field 4', 'Major 4', 1),
+    (5, 'Member 5', 'Company 5', 'Field 5', 'Major 5', 3),
+    (6, 'Member 6', 'Company 6', 'Field 6', 'Major 6', 4),
+    (7, 'Member 7', 'Company 7', 'Field 7', 'Major 7', 2),
+    (8, 'Member 8', 'Company 8', 'Field 8', 'Major 8', 1),
+    (9, 'Member 9', 'Company 9', 'Field 9', 'Major 9', 3),
+    (10, 'Member 10', 'Company 10', 'Field 10', 'Major 10', 4);
 
 -- Insert Review records
-INSERT INTO review (id, title, content, order_number, grade, created_at, program_id, member_id)
+INSERT INTO review (id, title, content, status,  order_number, grade, created_at, program_id, member_id)
 VALUES
-    (1, 'Great Liveclass 1', 'Learned a lot from Liveclass 1', 1, 5, CURRENT_TIMESTAMP - 2, 1, 1),
-    (2, 'Good Liveclass 2', 'Liveclass 2 was very informative', 2, 4, CURRENT_TIMESTAMP - 3, 1, 2),
-    (3, 'Excellent Liveclass 3', 'Highly recommend Liveclass 3', 3, 5, CURRENT_TIMESTAMP - 4, 3, 3),
-    (4, 'Challenging Challenge 1', 'Challenge 1 pushed my limits', 1, 5, CURRENT_TIMESTAMP - 1, 4, 4),
-    (5, 'Tough Challenge 2', 'Challenge 2 was tough but rewarding', 2, 4, CURRENT_TIMESTAMP - 2, 5, 5),
-    (6, 'Engaging Challenge 3', 'Challenge 3 kept me engaged', 3, 5, CURRENT_TIMESTAMP - 3, 6, 6),
-    (7, 'Rewarding Challenge 4', 'Challenge 4 was very rewarding', 4, 4, CURRENT_TIMESTAMP - 4, 7, 7);
+    (1, 'Great Liveclass 1', 'Learned a lot from Liveclass 1', 'EMPLOYED', 1, 5, CURRENT_TIMESTAMP - 2, 1, 1),
+    (2, 'Good Liveclass 2', 'Liveclass 2 was very informative', 'EMPLOYED',2, 4, CURRENT_TIMESTAMP - 3, 1, 2),
+    (3, 'Excellent Liveclass 3', 'Highly recommend Liveclass 3', 'EMPLOYED',3, 5, CURRENT_TIMESTAMP - 4, 1, 3),
+    (4, 'Challenging Challenge 1', 'Challenge 1 pushed my limits','EMPLOYED', 1, 5, CURRENT_TIMESTAMP - 1, 1, 4),
+    (5, 'Tough Challenge 2', 'Challenge 2 was tough but rewarding','EMPLOYED', 2, 4, CURRENT_TIMESTAMP - 2, 1, 5),
+    (6, 'Engaging Challenge 3', 'Challenge 3 kept me engaged', 'EMPLOYED',3, 5, CURRENT_TIMESTAMP - 3, 1, 6),
+    (7, 'Rewarding Challenge 4', 'Challenge 4 was very rewarding', 'EMPLOYED',4, 4, CURRENT_TIMESTAMP - 4, 1, 7);
 
 -- Insert Curriculum records
 INSERT INTO curriculum (id, title, content, order_number, program_id)
@@ -142,14 +142,14 @@ VALUES
 
 
 -- Insert Hooking records
-INSERT INTO hooking (id, title, content, image_type_image_url, template_type, order_number, program_id)
+INSERT INTO hooking (id, title, pre_title, tag_title,  content, image_url, template_type, order_number, program_id)
 VALUES
-    (1, 'Hooking for Liveclass 1', 'Hooking content for Liveclass 1', '', 'TYPE_A', 1, 1),
-    (2, 'Hooking for Liveclass 2', 'Hooking content for Liveclass 2', '', 'TYPE_A', 2, 1),
-    (3, 'Hooking for Liveclass 3', 'Hooking content for Liveclass 3', '', 'TYPE_A', 3, 1),
-    (5, 'Hooking for Challenge 2', 'Hooking content for Challenge 2', 'https://hooking_image_url_1', 'image', 2, 1),
-    (6, 'Hooking for Challenge 3', 'Hooking content for Challenge 3', 'https://hooking_image_url_2', 'image', 3, 1),
-    (7, 'Hooking for Challenge 4', 'Hooking content for Challenge 4', 'https://hooking_image_url_3', 'image', 1, 2);
+    (1, 'Hooking for Liveclass 1', 'Pre Title' , 'Tag Title','Hooking content for Liveclass 1', '', 'TYPE_A', 1, 1),
+    (2, 'Hooking for Liveclass 2', 'Pre Title', 'Pre Title','Hooking content for Liveclass 2', '', 'TYPE_A', 2, 1),
+    (3, 'Hooking for Liveclass 3','Pre Title' ,'Pre Title','Hooking content for Liveclass 3', '', 'TYPE_A', 3, 1),
+    (5, 'Hooking for Challenge 2','Pre Title' , 'Pre Title','Hooking content for Challenge 2', 'https://hooking_image_url_1', 'image', 2, 1),
+    (6, 'Hooking for Challenge 3','Pre Title' ,'Pre Title','Hooking content for Challenge 3', 'https://hooking_image_url_2', 'image', 3, 1),
+    (7, 'Hooking for Challenge 4', 'Pre Title', 'Pre Title','Hooking content for Challenge 4', 'https://hooking_image_url_3', 'image', 1, 2);
 
 
 -- Insert HookingImage records
@@ -165,7 +165,7 @@ VALUES
     (3, 'https://image_url_3', 3, 1);
 
 -- Insert Description records
-INSERT INTO description (id, title, content, image_type_image_url, template_type, order_number, program_id)
+INSERT INTO description (id, title, content, image_url, template_type, order_number, program_id)
 VALUES
     (1, 'Description for Liveclass 1', 'Detailed description of Liveclass 1', '',  'TYPE_A', 1, 1),
     (2, 'Description for Liveclass 2', 'Detailed description of Liveclass 2', '',  'TYPE_A', 2, 1),
