@@ -19,6 +19,18 @@ public class Member extends BaseEntity {
     @NotNull
     private String name;
 
+    @NotNull
+    private String dreamCompany; // 희망 회사
+
+    @NotNull
+    private String dreamWorkField; // 희망 직종
+
+    @NotNull
+    private int year; // 학년
+
+    @NotNull
+    private String major; // 전공
+
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> review = new ArrayList<>(); // 후기 정보
 

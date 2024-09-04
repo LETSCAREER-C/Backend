@@ -9,6 +9,8 @@ public class ReviewConverter {
                 .userName(review.getMember().getName())
                 .content(review.getContent())
                 .grade(review.getGrade())
+                .status(review.getStatus())
+                .date(review.getCreatedAt().toLocalDate())
                 .build();
     }
 }

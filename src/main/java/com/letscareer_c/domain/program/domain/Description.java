@@ -18,7 +18,7 @@ public class Description extends BaseEntity {
 
     private String content;
 
-    private String imageTypeImageUrl;
+    private String imageUrl;
 
     @NotNull
     private String templateType; // 나중에 enum으로 변경

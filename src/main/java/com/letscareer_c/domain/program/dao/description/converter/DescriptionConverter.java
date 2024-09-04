@@ -13,7 +13,7 @@ public class DescriptionConverter {
             // templateType이 image인 경우,  imageUrl만 보내주기
                 return DescriptionTypeImageDto.builder()
                         .templateType(description.getTemplateType())
-                        .imageTypeImageUrl(description.getImageTypeImageUrl())
+                        .imageUrl(description.getImageUrl())
                         .build();
             } else {
                 return DescriptionDto.builder()

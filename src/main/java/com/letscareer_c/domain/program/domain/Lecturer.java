@@ -18,6 +18,10 @@ public class Lecturer extends BaseEntity {
     @NotNull
     private String career;
 
+    private String introduce;
+
+    private String nickname;
+
     private String content;
 
     @NotNull
