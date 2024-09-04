@@ -99,8 +99,8 @@ class ProgramServiceTest {
     void getProgramDetail() {
         // given
         Long programId = 1L;
-        String tag = CareerTagEnum.CAREER_EXPLORE.name();
-        String programType = ProgramTypeEnum.LIVECLASS.name();
+        CareerTagEnum tag = CareerTagEnum.CAREER_EXPLORE;
+        ProgramTypeEnum programType = ProgramTypeEnum.LIVECLASS;
         // when
         ProgramDetailResponse response = programService.getProgramDetail(programId);
 
