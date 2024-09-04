@@ -30,6 +30,7 @@ import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -55,6 +56,7 @@ public class ProgramService {
     private final RecommendedProgramConverter recommendedProgramConverter;
     private final CurriculumRepository curriculumRepository;
 
+    @Cacheable(cacheNames = "getProgramList", key = "'programList:careerTag:' + #careerTag + ':programTypes:' + #programTypes + ':page:' + #page")
     public ProgramListResponse getProgramList(String careerTag, List<String> programTypes, int page) {
         PageRequest pageRequest = PageRequest.of(page,8);
         List<ProgramTypeEnum> programTypeEnums = returnProgramTypeEnums(programTypes);
