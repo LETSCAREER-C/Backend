@@ -3,7 +3,9 @@ package com.letscareer_c.infra.redis.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +28,7 @@ public class RedisCacheConfig {
     public ObjectMapper objectMapper() {
         return new ObjectMapper()
                 .findAndRegisterModules()
+                .enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -34,7 +37,7 @@ public class RedisCacheConfig {
 
 
     @Bean
-    public CacheManager programCacheManager(RedisConnectionFactory redisConnectionFactory) {
+    public CacheManager programCacheManager(RedisConnectionFactory redisConnectionFactory, ObjectMapper objectMapper) {
         RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration
                 .defaultCacheConfig()
                 .serializeKeysWith(
@@ -42,7 +45,7 @@ public class RedisCacheConfig {
                                 new StringRedisSerializer()))
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(
-                                new GenericJackson2JsonRedisSerializer(objectMapper())
+                                new GenericJackson2JsonRedisSerializer(objectMapper) // ObjectMapper 전달
                         )
                 )
                 .entryTtl(Duration.ofDays(7L));

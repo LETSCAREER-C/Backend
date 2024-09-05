@@ -6,12 +6,14 @@ import com.letscareer_c.domain.program.domain.tag.RecruitStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Builder
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProgramDto {
     private ProgramTypeEnum dtype;
     private Long programId;
