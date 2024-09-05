@@ -347,6 +347,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(4)
                         .userName("Review 1 User")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -354,6 +357,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(4)
                         .userName("Review 2 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -361,6 +367,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(3)
                         .userName("Review 3 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build()
         );
@@ -371,6 +380,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(5)
                         .userName("Review 1 User")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -378,6 +390,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(5)
                         .userName("Review 2 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -385,6 +400,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(4)
                         .userName("Review 3 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build()
         );
@@ -472,12 +490,18 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.latestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.latestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
                                 fieldWithPath("result.latestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
+                                fieldWithPath("result.latestReviews[].dreamWorkField").type(JsonFieldType.STRING).description("작성자 희망 직종"),
+                                fieldWithPath("result.latestReviews[].year").type(JsonFieldType.NUMBER).description("작성자 학년"),
+                                fieldWithPath("result.latestReviews[].major").type(JsonFieldType.STRING).description("작성자 전공"),
                                 fieldWithPath("result.latestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.bestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.bestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.bestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
                                 fieldWithPath("result.bestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
+                                fieldWithPath("result.bestReviews[].dreamWorkField").type(JsonFieldType.STRING).description("작성자 희망 직종"),
+                                fieldWithPath("result.bestReviews[].year").type(JsonFieldType.NUMBER).description("작성자 학년"),
+                                fieldWithPath("result.bestReviews[].major").type(JsonFieldType.STRING).description("작성자 전공"),
                                 fieldWithPath("result.bestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.recommendedPrograms[].programId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),
