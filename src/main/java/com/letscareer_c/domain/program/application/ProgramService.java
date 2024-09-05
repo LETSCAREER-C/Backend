@@ -56,7 +56,7 @@ public class ProgramService {
     private final RecommendedProgramConverter recommendedProgramConverter;
     private final CurriculumRepository curriculumRepository;
 
-//    @Cacheable(cacheNames = "getProgramList", key = "'programList:careerTag:' + #careerTag + ':programTypes:' + #programTypes + ':page:' + #page")
+    @Cacheable(cacheNames = "getProgramList", key = "'programList:careerTag:' + #careerTag + ':programTypes:' + #programTypes + ':page:' + #page")
     public ProgramListResponse getProgramList(String careerTag, List<String> programTypes, int page) {
         PageRequest pageRequest = PageRequest.of(page,8);
         List<ProgramTypeEnum> programTypeEnums = returnProgramTypeEnums(programTypes);
