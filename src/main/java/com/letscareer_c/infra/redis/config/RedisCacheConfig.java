@@ -28,7 +28,7 @@ public class RedisCacheConfig {
     public ObjectMapper objectMapper() {
         return new ObjectMapper()
                 .findAndRegisterModules()
-                .enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
+                //.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
