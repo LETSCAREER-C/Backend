@@ -28,6 +28,8 @@ jobs:
             
             git switch dev
             
+            git restore src/test/resources/application.yml
+            
             git pull origin dev
             
             rm -rf src/main/resources/application.yml
