@@ -7,6 +7,7 @@ public class ReviewConverter {
     public static ReviewDto toReviewDto(Review review) {
         return ReviewDto.builder()
                 .userName(review.getMember().getName())
+                .title(review.getTitle())
                 .content(review.getContent())
                 .major(review.getMember().getMajor())
                 .dreamWorkField(review.getMember().getDreamWorkField())

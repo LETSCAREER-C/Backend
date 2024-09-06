@@ -212,6 +212,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<ReviewDto> reviewDtoList = List.of(
                 ReviewDto.builder()
+                        .title("Review 1 Title")
                         .content("Review 1 Content")
                         .grade(4)
                         .userName("Review 1 User")
@@ -222,6 +223,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .title("Review 2 Title")
                         .content("Review 2 Content")
                         .grade(4)
                         .userName("Review 2 Nickname")
@@ -232,6 +234,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .title("Review 3 Title")
                         .content("Review 3 Content")
                         .grade(3)
                         .userName("Review 3 Nickname")
@@ -262,6 +265,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("메시지"),
                                 fieldWithPath("result").type(JsonFieldType.OBJECT).description("응답 데이터"),
                                 fieldWithPath("result.reviews").type(JsonFieldType.ARRAY).description("리뷰 목록"),
+                                fieldWithPath("result.reviews[].title").type(JsonFieldType.STRING).description("리뷰 제목"),
                                 fieldWithPath("result.reviews[].userName").type(JsonFieldType.STRING).description("사용자 이름"),
                                 fieldWithPath("result.reviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.reviews[].dreamWorkField").type(JsonFieldType.STRING).description("희망 업무 분야"),
@@ -476,6 +480,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<ReviewDto> latestReviews = List.of(
                 ReviewDto.builder()
+                        .title("Review 1 Title")
                         .content("Review 1 Content")
                         .grade(4)
                         .userName("Review 1 User")
@@ -486,6 +491,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .title("Review 2 Title")
                         .content("Review 2 Content")
                         .grade(4)
                         .userName("Review 2 Nickname")
@@ -496,6 +502,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .title("Review 3 Title")
                         .content("Review 3 Content")
                         .grade(3)
                         .userName("Review 3 Nickname")
@@ -509,6 +516,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<ReviewDto> bestReviews = List.of(
                 ReviewDto.builder()
+                        .title("Review 1 Title")
                         .content("Review 1 Content")
                         .grade(5)
                         .userName("Review 1 User")
@@ -519,6 +527,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .title("Review 2 Title")
                         .content("Review 2 Content")
                         .grade(5)
                         .userName("Review 2 Nickname")
@@ -529,6 +538,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .title("Review 3 Title")
                         .content("Review 3 Content")
                         .grade(4)
                         .userName("Review 3 Nickname")
@@ -620,6 +630,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.curriculum[].content").type(JsonFieldType.STRING).description("커리큘럼 내용"),
 
                                 fieldWithPath("result.latestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
+                                fieldWithPath("result.latestReviews[].title").type(JsonFieldType.STRING).description("리뷰 제목"),
                                 fieldWithPath("result.latestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.latestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
                                 fieldWithPath("result.latestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
@@ -629,6 +640,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.latestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.bestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
+                                fieldWithPath("result.bestReviews[].title").type(JsonFieldType.STRING).description("리뷰 제목"),
                                 fieldWithPath("result.bestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.bestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
                                 fieldWithPath("result.bestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),

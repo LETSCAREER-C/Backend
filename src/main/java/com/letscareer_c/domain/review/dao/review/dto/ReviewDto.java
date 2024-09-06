@@ -14,6 +14,7 @@ import java.time.LocalDate;
 @Builder
 public class ReviewDto {
     private String userName;
+    public String title;
     private String content;
     private String dreamWorkField;
     private String major;
