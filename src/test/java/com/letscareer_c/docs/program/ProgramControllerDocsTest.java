@@ -256,7 +256,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andDo(document("get-program-detail",
+                .andDo(document("get-all-program-reviews",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
                         responseFields(
