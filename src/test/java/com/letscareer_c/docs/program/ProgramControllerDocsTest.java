@@ -6,6 +6,7 @@ import com.letscareer_c.domain.program.application.ProgramService;
 import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
 import com.letscareer_c.domain.program.application.response.ProgramDto;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
+import com.letscareer_c.domain.program.application.response.RecommendedProgramResponse;
 import com.letscareer_c.domain.program.dao.curriculum.dto.CurriculumDto;
 import com.letscareer_c.domain.program.dao.description.dto.DescriptionDto;
 import com.letscareer_c.domain.program.dao.description.dto.DescriptionImageDto;
@@ -15,7 +16,7 @@ import com.letscareer_c.domain.program.dao.hooking.dto.HookingDto;
 import com.letscareer_c.domain.program.dao.hooking.dto.HookingImageDto;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
-import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
+import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;
@@ -137,6 +138,68 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.programDtos[].programEndDate").type(JsonFieldType.ARRAY).description("프로그램 진행 끝나는 날짜"),
                                 fieldWithPath("result.programDtos[].deadline").type(JsonFieldType.NUMBER).description("모집 마감 D-Day"),
                                 fieldWithPath("result.totalPageCount").type(JsonFieldType.NUMBER).description("전체 페이지 수")
+                        )
+                ));
+    }
+
+    @DisplayName("특정 programId에 해당하는 프로그램 추천 강좌 중 커리어 단계에 따른 리스트 조회 API")
+    @Test
+    void getRecommendedProgramsByProgramIdAndCareerTag() throws Exception {
+        Long programId = 1L;
+        String careerTag = "DOCUMENT_PREPARE";
+
+        List<RecommendedProgramDto> recommendedProgramDtoList = List.of(
+                RecommendedProgramDto.builder()
+                        .programId(1L)
+                        .title("Recommended Program 1")
+                        .tag(CareerTagEnum.DOCUMENT_PREPARE)
+                        .thumbnail("Recommended Program 1 Thumbnail")
+                        .intro("Recommended Program 1 Intro")
+                        .recruitEndDate(LocalDate.now())
+                        .programStartDate(LocalDate.now())
+                        .programEndDate(LocalDate.now())
+                        .build(),
+                RecommendedProgramDto.builder()
+                        .programId(1L)
+                        .title("Recommended Program 2")
+                        .tag(CareerTagEnum.DOCUMENT_PREPARE)
+                        .thumbnail("Recommended Program 2 Thumbnail")
+                        .intro("Recommended Program 2 Intro")
+                        .recruitEndDate(LocalDate.now())
+                        .programStartDate(LocalDate.now())
+                        .programEndDate(LocalDate.now())
+                        .build()
+
+        );
+
+        given(programService.getRecommendedProgramsByCareerTag(programId, careerTag))
+                .willReturn(
+                        RecommendedProgramResponse.builder()
+                                .recommendedPrograms(recommendedProgramDtoList)
+                                .build()
+                );
+
+        //when, then
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/1/recommended/DOCUMENT_PREPARE")
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("get-recommended-program-list",
+                        // JSON이 ENTER가 포함된 모습으로 나오도록
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        responseFields(
+                                fieldWithPath("code").description("응답 코드"),
+                                fieldWithPath("status").description("응답 상태"),
+                                fieldWithPath("message").description("응답 메시지"),
+                                fieldWithPath("result.recommendedPrograms[].programId").description("추천 프로그램 ID"),
+                                fieldWithPath("result.recommendedPrograms[].tag").description("추천 프로그램 태그"),
+                                fieldWithPath("result.recommendedPrograms[].title").description("추천 프로그램 제목"),
+                                fieldWithPath("result.recommendedPrograms[].intro").description("추천 프로그램 소개"),
+                                fieldWithPath("result.recommendedPrograms[].thumbnail").description("추천 프로그램 썸네일 이미지 URL"),
+                                fieldWithPath("result.recommendedPrograms[].recruitEndDate").description("추천 모집 종료 날짜"),
+                                fieldWithPath("result.recommendedPrograms[].programStartDate").description("추천 프로그램 시작 날짜"),
+                                fieldWithPath("result.recommendedPrograms[].programEndDate").description("추천 프로그램 종료 날짜")
                         )
                 ));
     }
@@ -347,6 +410,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(4)
                         .userName("Review 1 User")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -354,6 +420,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(4)
                         .userName("Review 2 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -361,6 +430,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(3)
                         .userName("Review 3 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build()
         );
@@ -371,6 +443,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(5)
                         .userName("Review 1 User")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -378,6 +453,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(5)
                         .userName("Review 2 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
@@ -385,6 +463,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .grade(4)
                         .userName("Review 3 Nickname")
                         .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
                         .date(LocalDate.now())
                         .build()
         );
@@ -472,12 +553,18 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.latestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.latestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
                                 fieldWithPath("result.latestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
+                                fieldWithPath("result.latestReviews[].dreamWorkField").type(JsonFieldType.STRING).description("작성자 희망 직종"),
+                                fieldWithPath("result.latestReviews[].year").type(JsonFieldType.NUMBER).description("작성자 학년"),
+                                fieldWithPath("result.latestReviews[].major").type(JsonFieldType.STRING).description("작성자 전공"),
                                 fieldWithPath("result.latestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.bestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.bestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
                                 fieldWithPath("result.bestReviews[].grade").type(JsonFieldType.NUMBER).description("리뷰 별점"),
                                 fieldWithPath("result.bestReviews[].status").type(JsonFieldType.STRING).description("작성자 취업 상태"),
+                                fieldWithPath("result.bestReviews[].dreamWorkField").type(JsonFieldType.STRING).description("작성자 희망 직종"),
+                                fieldWithPath("result.bestReviews[].year").type(JsonFieldType.NUMBER).description("작성자 학년"),
+                                fieldWithPath("result.bestReviews[].major").type(JsonFieldType.STRING).description("작성자 전공"),
                                 fieldWithPath("result.bestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
                                 fieldWithPath("result.recommendedPrograms[].programId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),

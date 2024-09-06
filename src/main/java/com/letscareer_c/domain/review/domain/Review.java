@@ -1,8 +1,8 @@
-package com.letscareer_c.domain.program.domain;
+package com.letscareer_c.domain.review.domain;
 
 import com.letscareer_c.domain.member.domain.Member;
+import com.letscareer_c.domain.program.domain.Program;
 import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;
-import com.letscareer_c.global.common.domain.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

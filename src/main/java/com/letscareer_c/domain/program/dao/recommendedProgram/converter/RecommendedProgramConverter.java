@@ -25,6 +25,7 @@ public class RecommendedProgramConverter {
         if (program.isEmpty()) {
             throw new IllegalArgumentException("해당 프로그램이 존재하지 않습니다.");
         }
+
         return RecommendedProgramDto.builder()
                 .programId(recommendedProgram.getId())
                 .title(program.get().getTitle())

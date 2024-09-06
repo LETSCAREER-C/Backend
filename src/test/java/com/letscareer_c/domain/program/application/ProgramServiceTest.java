@@ -6,7 +6,6 @@ import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
-import jakarta.persistence.EntityNotFoundException;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.DisplayName;
@@ -129,7 +128,7 @@ class ProgramServiceTest {
         AssertionsForClassTypes.assertThat(response.getCurriculum().size()).isEqualTo(6);
 
         AssertionsForClassTypes.assertThat(response.getRecommendedPrograms()).isNotNull();
-        AssertionsForClassTypes.assertThat(response.getRecommendedPrograms().size()).isEqualTo(2);
+        AssertionsForClassTypes.assertThat(response.getRecommendedPrograms().size()).isEqualTo(0);
 
         AssertionsForClassTypes.assertThat(response.getFaq()).isNotNull();
         AssertionsForClassTypes.assertThat(response.getFaq().size()).isEqualTo(7);

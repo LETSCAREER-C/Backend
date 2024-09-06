@@ -1,4 +1,4 @@
-package com.letscareer_c.domain.program.dao.review.dto;
+package com.letscareer_c.domain.review.dao.review.dto;
 
 import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,9 @@ import java.time.LocalDate;
 public class ReviewDto {
     private String userName;
     private String content;
+    private String dreamWorkField;
+    private String major;
+    private int year;
     private EmploymentStatusEnum status;
     private LocalDate date;
     private int grade;

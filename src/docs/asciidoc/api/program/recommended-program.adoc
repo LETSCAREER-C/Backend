@@ -1,0 +1,10 @@
+[[get-program-list]]
+=== 추천 프로그램 리스트 조회
+
+==== HTTP Request
+include::{snippets}/get-recommended-program-list/http-request.adoc[]
+include::{snippets}/get-recommended-program-list/request-body.adoc[]
+
+==== HTTP Response
+include::{snippets}/get-recommended-program-list/http-response.adoc[]
+include::{snippets}/get-recommended-program-list/response-fields.adoc[]
