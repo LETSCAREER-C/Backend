@@ -3,8 +3,6 @@ package com.letscareer_c.infra.redis.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -13,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.RedisSerializationContext;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
@@ -23,18 +20,14 @@ import java.time.Duration;
 @Configuration
 @EnableCaching
 public class RedisCacheConfig {
-
+    //Redis 캐시를 관리하기 위한 설정을 위한 클래스
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper()
-                .findAndRegisterModules()
-                //.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL)
-                .enable(SerializationFeature.INDENT_OUTPUT)
+                .findAndRegisterModules() // JavaTimeModule을 자동으로 등록
                 .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .registerModule(new JavaTimeModule());
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
-
 
     @Bean
     public CacheManager programCacheManager(RedisConnectionFactory redisConnectionFactory, ObjectMapper objectMapper) {
@@ -45,9 +38,7 @@ public class RedisCacheConfig {
                                 new StringRedisSerializer()))
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(
-                                new GenericJackson2JsonRedisSerializer(objectMapper) // ObjectMapper 전달
-                        )
-                )
+                                new Jackson2JsonRedisSerializer<>(objectMapper, ProgramListResponse.class)))
                 .entryTtl(Duration.ofDays(7L));
 
         return RedisCacheManager
