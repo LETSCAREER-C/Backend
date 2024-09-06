@@ -13,6 +13,8 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class ReviewDto {
+    private Long id;
+    private String programName;
     private String userName;
     public String title;
     private String content;

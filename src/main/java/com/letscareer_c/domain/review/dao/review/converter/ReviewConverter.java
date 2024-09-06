@@ -6,6 +6,8 @@ import com.letscareer_c.domain.review.domain.Review;
 public class ReviewConverter {
     public static ReviewDto toReviewDto(Review review) {
         return ReviewDto.builder()
+                .id(review.getId())
+                .programName(review.getProgram().getTitle())
                 .userName(review.getMember().getName())
                 .title(review.getTitle())
                 .content(review.getContent())
