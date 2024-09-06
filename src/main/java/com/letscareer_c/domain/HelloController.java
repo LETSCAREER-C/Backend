@@ -18,7 +18,7 @@ public class HelloController {
 
     @GetMapping
     public String hello() {
-        return "우하하하 재밌눈 코딩";
+        return "우하하하 행복한 코딩~!";
     }
 
     @PostMapping
