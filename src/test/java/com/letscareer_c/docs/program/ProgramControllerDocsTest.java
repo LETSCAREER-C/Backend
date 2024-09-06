@@ -16,6 +16,7 @@ import com.letscareer_c.domain.program.dao.hooking.dto.HookingDto;
 import com.letscareer_c.domain.program.dao.hooking.dto.HookingImageDto;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
+import com.letscareer_c.domain.review.application.response.ReviewListResponse;
 import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
@@ -200,6 +201,75 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.recommendedPrograms[].recruitEndDate").description("추천 모집 종료 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].programStartDate").description("추천 프로그램 시작 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].programEndDate").description("추천 프로그램 종료 날짜")
+                        )
+                ));
+    }
+
+    @DisplayName("특정 programId에 해당하는 프로그램 전체 후기 조회 API")
+    @Test
+    void getAllReviewsFromProgram() throws Exception {
+        Long programId = 1L;
+
+        List<ReviewDto> reviewDtoList = List.of(
+                ReviewDto.builder()
+                        .content("Review 1 Content")
+                        .grade(4)
+                        .userName("Review 1 User")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
+                        .date(LocalDate.now())
+                        .build(),
+                ReviewDto.builder()
+                        .content("Review 2 Content")
+                        .grade(4)
+                        .userName("Review 2 Nickname")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
+                        .date(LocalDate.now())
+                        .build(),
+                ReviewDto.builder()
+                        .content("Review 3 Content")
+                        .grade(3)
+                        .userName("Review 3 Nickname")
+                        .status(EmploymentStatusEnum.EMPLOYED)
+                        .dreamWorkField("IT")
+                        .year(3)
+                        .major("Computer Science")
+                        .date(LocalDate.now())
+                        .build()
+        );
+
+        given(programService.getReviewList(programId))
+                .willReturn(ReviewListResponse.builder()
+                        .reviews(reviewDtoList)
+                        .build()
+                );
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/review", programId)
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andDo(document("get-program-detail",
+                        preprocessRequest(prettyPrint()),
+                        preprocessResponse(prettyPrint()),
+                        responseFields(
+                                fieldWithPath("code").type(JsonFieldType.NUMBER).description("코드"),
+                                fieldWithPath("status").type(JsonFieldType.NUMBER).description("상태"),
+                                fieldWithPath("message").type(JsonFieldType.STRING).description("메시지"),
+                                fieldWithPath("result").type(JsonFieldType.OBJECT).description("응답 데이터"),
+                                fieldWithPath("result.reviews").type(JsonFieldType.ARRAY).description("리뷰 목록"),
+                                fieldWithPath("result.reviews[].userName").type(JsonFieldType.STRING).description("사용자 이름"),
+                                fieldWithPath("result.reviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
+                                fieldWithPath("result.reviews[].dreamWorkField").type(JsonFieldType.STRING).description("희망 업무 분야"),
+                                fieldWithPath("result.reviews[].major").type(JsonFieldType.STRING).description("전공"),
+                                fieldWithPath("result.reviews[].year").type(JsonFieldType.NUMBER).description("연차"),
+                                fieldWithPath("result.reviews[].status").type(JsonFieldType.STRING).description("고용 상태"),
+                                fieldWithPath("result.reviews[].date").type(JsonFieldType.ARRAY).description("리뷰 날짜"),
+                                fieldWithPath("result.reviews[].grade").type(JsonFieldType.NUMBER).description("평점")
                         )
                 ));
     }

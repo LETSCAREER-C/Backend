@@ -13,5 +13,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewListResponse {
-    List<ReviewDto> reviewDtos;
+    List<ReviewDto> reviews;
 }

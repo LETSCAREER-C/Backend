@@ -146,4 +146,5 @@ class ProgramServiceTest {
         assertThatThrownBy(() -> programService.getProgramDetail(programId))
                 .isInstanceOf(ProgramException.class);
     }
+
 }

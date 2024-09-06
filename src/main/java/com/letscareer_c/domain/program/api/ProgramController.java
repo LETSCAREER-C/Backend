@@ -5,6 +5,7 @@ import com.letscareer_c.domain.program.application.response.ProgramDetailRespons
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import com.letscareer_c.domain.program.application.response.RecommendedProgramResponse;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
+import com.letscareer_c.domain.review.application.response.ReviewListResponse;
 import com.letscareer_c.global.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -48,5 +49,14 @@ public class ProgramController {
     public BaseResponse<RecommendedProgramResponse> getRecommendedProgramsByCareerTag(@PathVariable Long programId , @PathVariable String careerTag) {
         RecommendedProgramResponse response = programService.getRecommendedProgramsByCareerTag(programId, careerTag);
          return new BaseResponse<>(response);
+    }
+
+    /**
+     * 프로그램 전체 후기 조회 API
+     */
+    @GetMapping("/{programId}/review")
+    public BaseResponse<ReviewListResponse> getProgramReviewList(@PathVariable Long programId) {
+        ReviewListResponse response = programService.getReviewList(programId);
+        return new BaseResponse<>(response);
     }
 }
