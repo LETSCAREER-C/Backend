@@ -27,7 +27,7 @@ public class RecommendedProgramConverter {
         }
 
         return RecommendedProgramDto.builder()
-                .programId(recommendedProgram.getId())
+                .recommendedProgramId(recommendedProgram.getRecommendedProgramId())
                 .title(program.get().getTitle())
                 .tag(program.get().getTag())
                 .thumbnail(program.get().getThumbnail())
