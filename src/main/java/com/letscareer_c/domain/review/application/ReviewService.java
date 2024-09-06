@@ -1,8 +1,5 @@
 package com.letscareer_c.domain.review.application;
 
-import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
-import com.letscareer_c.domain.program.exception.ProgramException;
-import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
 import com.letscareer_c.domain.review.application.response.ReviewListResponse;
 import com.letscareer_c.domain.review.dao.review.ReviewRepository;
 import com.letscareer_c.domain.review.dao.review.converter.ReviewConverter;

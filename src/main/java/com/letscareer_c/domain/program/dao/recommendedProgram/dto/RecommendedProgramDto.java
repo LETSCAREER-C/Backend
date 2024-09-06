@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Builder
 public class RecommendedProgramDto {
-    private Long programId;
+    private Long recommendedProgramId;
     private CareerTagEnum tag;
     private String title;
     private String intro;

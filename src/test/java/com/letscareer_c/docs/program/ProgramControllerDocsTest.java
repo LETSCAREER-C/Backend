@@ -150,7 +150,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<RecommendedProgramDto> recommendedProgramDtoList = List.of(
                 RecommendedProgramDto.builder()
-                        .programId(1L)
+                        .recommendedProgramId(1L)
                         .title("Recommended Program 1")
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 1 Thumbnail")
@@ -160,7 +160,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .programEndDate(LocalDate.now())
                         .build(),
                 RecommendedProgramDto.builder()
-                        .programId(1L)
+                        .recommendedProgramId(1L)
                         .title("Recommended Program 2")
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 2 Thumbnail")
@@ -192,7 +192,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("code").description("응답 코드"),
                                 fieldWithPath("status").description("응답 상태"),
                                 fieldWithPath("message").description("응답 메시지"),
-                                fieldWithPath("result.recommendedPrograms[].programId").description("추천 프로그램 ID"),
+                                fieldWithPath("result.recommendedPrograms[].recommendedProgramId").description("추천 프로그램 ID"),
                                 fieldWithPath("result.recommendedPrograms[].tag").description("추천 프로그램 태그"),
                                 fieldWithPath("result.recommendedPrograms[].title").description("추천 프로그램 제목"),
                                 fieldWithPath("result.recommendedPrograms[].intro").description("추천 프로그램 소개"),
@@ -267,7 +267,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<RecommendedProgramDto> recommendedProgramDtoList = List.of(
                 RecommendedProgramDto.builder()
-                        .programId(1L)
+                        .recommendedProgramId(1L)
                         .title("Recommended Program 1")
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 1 Thumbnail")
@@ -277,7 +277,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .programEndDate(LocalDate.now())
                         .build(),
                 RecommendedProgramDto.builder()
-                        .programId(1L)
+                        .recommendedProgramId(1L)
                         .title("Recommended Program 2")
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 2 Thumbnail")
@@ -567,7 +567,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.bestReviews[].major").type(JsonFieldType.STRING).description("작성자 전공"),
                                 fieldWithPath("result.bestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
-                                fieldWithPath("result.recommendedPrograms[].programId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),
+                                fieldWithPath("result.recommendedPrograms[].recommendedProgramId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),
                                 fieldWithPath("result.recommendedPrograms[].tag").type(JsonFieldType.STRING).description("추천 프로그램 태그"),
                                 fieldWithPath("result.recommendedPrograms[].title").type(JsonFieldType.STRING).description("추천 프로그램 제목"),
                                 fieldWithPath("result.recommendedPrograms[].intro").type(JsonFieldType.STRING).description("추천 프로그램 소개"),

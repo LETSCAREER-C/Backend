@@ -4,7 +4,6 @@ import com.letscareer_c.domain.program.application.ProgramService;
 import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
 import com.letscareer_c.domain.program.application.response.RecommendedProgramResponse;
-import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
 import com.letscareer_c.global.common.response.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
