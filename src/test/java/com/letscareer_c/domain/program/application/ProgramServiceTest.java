@@ -128,7 +128,7 @@ class ProgramServiceTest {
         AssertionsForClassTypes.assertThat(response.getCurriculum().size()).isEqualTo(6);
 
         AssertionsForClassTypes.assertThat(response.getRecommendedPrograms()).isNotNull();
-        AssertionsForClassTypes.assertThat(response.getRecommendedPrograms().size()).isEqualTo(2);
+        AssertionsForClassTypes.assertThat(response.getRecommendedPrograms().size()).isEqualTo(0);
 
         AssertionsForClassTypes.assertThat(response.getFaq()).isNotNull();
         AssertionsForClassTypes.assertThat(response.getFaq().size()).isEqualTo(7);

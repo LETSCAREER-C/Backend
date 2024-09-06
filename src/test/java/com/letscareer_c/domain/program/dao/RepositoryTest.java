@@ -5,7 +5,7 @@ import com.letscareer_c.domain.program.dao.description.DescriptionRepository;
 import com.letscareer_c.domain.program.dao.faq.FaqRepository;
 import com.letscareer_c.domain.program.dao.hooking.HookingRepository;
 import com.letscareer_c.domain.program.dao.lecturer.LecturerRepository;
-import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedRepository;
+import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedProgramRepository;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.review.dao.review.ReviewRepository;
 import com.letscareer_c.domain.program.domain.*;
@@ -34,7 +34,7 @@ public class RepositoryTest {
     @Autowired
     private ReviewRepository reviewRepository;
     @Autowired
-    private RecommendedRepository recommendedRepository;
+    private RecommendedProgramRepository recommendedRepository;
 
     // Hooking 조회 테스트
     @Test

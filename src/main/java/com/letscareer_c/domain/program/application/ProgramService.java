@@ -18,9 +18,10 @@ import com.letscareer_c.domain.program.dao.hooking.converter.HookingConverter;
 import com.letscareer_c.domain.program.dao.lecturer.LecturerRepository;
 import com.letscareer_c.domain.program.dao.lecturer.converter.LecturerConverter;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
-import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedRepository;
+import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedProgramRepository;
 import com.letscareer_c.domain.program.dao.recommendedProgram.converter.RecommendedProgramConverter;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
+import com.letscareer_c.domain.program.domain.RecommendedProgram;
 import com.letscareer_c.domain.review.dao.review.ReviewRepository;
 import com.letscareer_c.domain.review.dao.review.converter.ReviewConverter;
 import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
@@ -52,7 +53,7 @@ public class ProgramService {
     private final FaqRepository faqRepository;
     private final DescriptionRepository descriptionRepository;
     private final HookingRepository hookingRepository;
-    private final RecommendedRepository recommendedRepository;
+    private final RecommendedProgramRepository recommendedRepository;
     private final RecommendedProgramConverter recommendedProgramConverter;
     private final CurriculumRepository curriculumRepository;
 
@@ -167,10 +168,7 @@ public class ProgramService {
                     .toList();
 
             // 추천 강좌
-            List<RecommendedProgramDto> recommendedPrograms = recommendedRepository.findByProgramId(programId)
-                    .stream()
-                    .map(recommendedProgramConverter::toRecommendedProgramDto)
-                    .toList();
+            List<RecommendedProgramDto> recommendedPrograms = getRecommendedProgramsDtosByCareerTag(programId, program.getTag().name());
 
             // 프로그램 상세 정보 (후킹)
             List<Object> hooking = hookingRepository.findByProgramId(programId)
@@ -206,4 +204,18 @@ public class ProgramService {
             throw new ProgramException(ProgramExceptionErrorCode.PROGRAM_NOT_FOUND);
         }
     }
+
+    private List<RecommendedProgramDto> getRecommendedProgramsDtosByCareerTag(Long programId, String careerTag) {
+        return recommendedRepository.findByProgramId(programId)
+                .stream()
+                .map(recommendedProgramConverter::toRecommendedProgramDto)
+                .filter(recommendedProgramDto -> recommendedProgramDto.getTag() == CareerTagEnum.valueOf(careerTag.toUpperCase()))
+                .toList();
+    }
+
+    public RecommendedProgramResponse getRecommendedProgramsByCareerTag(Long programId, String careerTag) {
+        List<RecommendedProgramDto> recommendedPrograms = getRecommendedProgramsDtosByCareerTag(programId, careerTag);
+        return new RecommendedProgramResponse(recommendedPrograms);
+    }
+
 }
