@@ -15,7 +15,7 @@ import com.letscareer_c.domain.program.dao.hooking.dto.HookingDto;
 import com.letscareer_c.domain.program.dao.hooking.dto.HookingImageDto;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
-import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
+import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;

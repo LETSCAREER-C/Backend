@@ -2,11 +2,10 @@ package com.letscareer_c.domain.program.domain;
 
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.domain.tag.RecruitStatus;
+import com.letscareer_c.domain.review.domain.Review;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

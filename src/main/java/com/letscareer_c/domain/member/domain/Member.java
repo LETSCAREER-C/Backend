@@ -1,6 +1,6 @@
 package com.letscareer_c.domain.member.domain;
 
-import com.letscareer_c.domain.program.domain.Review;
+import com.letscareer_c.domain.review.domain.Review;
 import com.letscareer_c.global.common.domain.BaseEntity;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

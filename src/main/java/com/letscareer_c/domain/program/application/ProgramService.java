@@ -3,6 +3,7 @@ package com.letscareer_c.domain.program.application;
 import com.letscareer_c.domain.program.application.response.ProgramDetailResponse;
 import com.letscareer_c.domain.program.application.response.ProgramDto;
 import com.letscareer_c.domain.program.application.response.ProgramListResponse;
+import com.letscareer_c.domain.program.application.response.RecommendedProgramResponse;
 import com.letscareer_c.domain.program.dao.ProgramRepository;
 import com.letscareer_c.domain.program.dao.curriculum.CurriculumRepository;
 import com.letscareer_c.domain.program.dao.curriculum.converter.CurriculumConverter;
@@ -20,9 +21,9 @@ import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedRepository;
 import com.letscareer_c.domain.program.dao.recommendedProgram.converter.RecommendedProgramConverter;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
-import com.letscareer_c.domain.program.dao.review.ReviewRepository;
-import com.letscareer_c.domain.program.dao.review.converter.ReviewConverter;
-import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
+import com.letscareer_c.domain.review.dao.review.ReviewRepository;
+import com.letscareer_c.domain.review.dao.review.converter.ReviewConverter;
+import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.Program;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
@@ -30,7 +31,6 @@ import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.Cacheable;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -91,7 +91,7 @@ public class ProgramService {
         return programTypeEnums;
     }
 
-    public CareerTagEnum returnCareerTagEnum(String careerTag) {
+    public static CareerTagEnum returnCareerTagEnum(String careerTag) {
         //CareerTagEnum으로 변환(변환 불가 시 필터링)
         try {
             return CareerTagEnum.valueOf(careerTag.toUpperCase());

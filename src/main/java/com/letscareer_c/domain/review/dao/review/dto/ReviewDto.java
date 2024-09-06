@@ -1,4 +1,4 @@
-package com.letscareer_c.domain.program.dao.review.dto;
+package com.letscareer_c.domain.review.dao.review.dto;
 
 import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;
 import lombok.AllArgsConstructor;

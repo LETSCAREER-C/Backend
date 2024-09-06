@@ -6,7 +6,6 @@ import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
-import jakarta.persistence.EntityNotFoundException;
 import org.assertj.core.api.AssertionsForClassTypes;
 import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.DisplayName;

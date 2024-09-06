@@ -1,7 +1,7 @@
-package com.letscareer_c.domain.program.dao.review.converter;
+package com.letscareer_c.domain.review.dao.review.converter;
 
-import com.letscareer_c.domain.program.dao.review.dto.ReviewDto;
-import com.letscareer_c.domain.program.domain.Review;
+import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
+import com.letscareer_c.domain.review.domain.Review;
 
 public class ReviewConverter {
     public static ReviewDto toReviewDto(Review review) {
