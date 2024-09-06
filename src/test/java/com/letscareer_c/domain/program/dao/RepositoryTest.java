@@ -6,8 +6,10 @@ import com.letscareer_c.domain.program.dao.faq.FaqRepository;
 import com.letscareer_c.domain.program.dao.hooking.HookingRepository;
 import com.letscareer_c.domain.program.dao.lecturer.LecturerRepository;
 import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedRepository;
-import com.letscareer_c.domain.program.dao.review.ReviewRepository;
+import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
+import com.letscareer_c.domain.review.dao.review.ReviewRepository;
 import com.letscareer_c.domain.program.domain.*;
+import com.letscareer_c.domain.review.domain.Review;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,4 +131,20 @@ public class RepositoryTest {
         assertThat(recommendedPrograms).isNotNull();
         assertThat(recommendedPrograms.size()).isEqualTo(2);
     }
+
+    // Review 조회 테스트
+    @Test
+    @DisplayName("커리어 단계에 해당하는 모든 Review를 조회한다.")
+    void findReviewByCareerTag() {
+        // GIVEN
+
+        // WHEN
+        List<Review> allReviews = reviewRepository.findByProgram_Tag(CareerTagEnum.CAREER_EXPLORE);
+
+        // THEN
+        assertThat(allReviews).isNotNull();
+        assertThat(allReviews.size()).isEqualTo(7);
+    }
+
 }
+
