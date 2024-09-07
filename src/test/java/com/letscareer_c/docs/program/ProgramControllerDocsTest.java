@@ -212,6 +212,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<ReviewDto> reviewDtoList = List.of(
                 ReviewDto.builder()
+                        .id(1L)
+                        .programName("Program 1")
                         .title("Review 1 Title")
                         .content("Review 1 Content")
                         .grade(4)
@@ -223,6 +225,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .id(2L)
+                        .programName("Program 2")
                         .title("Review 2 Title")
                         .content("Review 2 Content")
                         .grade(4)
@@ -234,6 +238,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .id(3L)
+                        .programName("Program 3")
                         .title("Review 3 Title")
                         .content("Review 3 Content")
                         .grade(3)
@@ -265,6 +271,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("메시지"),
                                 fieldWithPath("result").type(JsonFieldType.OBJECT).description("응답 데이터"),
                                 fieldWithPath("result.reviews").type(JsonFieldType.ARRAY).description("리뷰 목록"),
+                                fieldWithPath("result.reviews[].id").type(JsonFieldType.NUMBER).description("리뷰 ID"),
+                                fieldWithPath("result.reviews[].programName").type(JsonFieldType.STRING).description("프로그램 이름"),
                                 fieldWithPath("result.reviews[].title").type(JsonFieldType.STRING).description("리뷰 제목"),
                                 fieldWithPath("result.reviews[].userName").type(JsonFieldType.STRING).description("사용자 이름"),
                                 fieldWithPath("result.reviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
@@ -480,6 +488,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<ReviewDto> latestReviews = List.of(
                 ReviewDto.builder()
+                        .id(1L)
+                        .programName("Program 1")
                         .title("Review 1 Title")
                         .content("Review 1 Content")
                         .grade(4)
@@ -491,6 +501,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .id(2L)
+                        .programName("Program 2")
                         .title("Review 2 Title")
                         .content("Review 2 Content")
                         .grade(4)
@@ -502,6 +514,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .id(3L)
+                        .programName("Program 3")
                         .title("Review 3 Title")
                         .content("Review 3 Content")
                         .grade(3)
@@ -516,6 +530,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
         List<ReviewDto> bestReviews = List.of(
                 ReviewDto.builder()
+                        .id(1L)
+                        .programName("Program 1")
                         .title("Review 1 Title")
                         .content("Review 1 Content")
                         .grade(5)
@@ -527,6 +543,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .id(2L)
+                        .programName("Program 2")
                         .title("Review 2 Title")
                         .content("Review 2 Content")
                         .grade(5)
@@ -538,6 +556,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .date(LocalDate.now())
                         .build(),
                 ReviewDto.builder()
+                        .id(3L)
+                        .programName("Program 3")
                         .title("Review 3 Title")
                         .content("Review 3 Content")
                         .grade(4)
@@ -629,6 +649,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.curriculum[].title").type(JsonFieldType.STRING).description("커리큘럼 제목"),
                                 fieldWithPath("result.curriculum[].content").type(JsonFieldType.STRING).description("커리큘럼 내용"),
 
+                                fieldWithPath("result.latestReviews[].id").type(JsonFieldType.NUMBER).description("리뷰 ID"),
+                                fieldWithPath("result.latestReviews[].programName").type(JsonFieldType.STRING).description("프로그램 이름"),
                                 fieldWithPath("result.latestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.latestReviews[].title").type(JsonFieldType.STRING).description("리뷰 제목"),
                                 fieldWithPath("result.latestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
@@ -639,6 +661,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.latestReviews[].major").type(JsonFieldType.STRING).description("작성자 전공"),
                                 fieldWithPath("result.latestReviews[].date").type(JsonFieldType.ARRAY).description("리뷰 작성 날짜"),
 
+                                fieldWithPath("result.bestReviews[].id").type(JsonFieldType.NUMBER).description("리뷰 ID"),
+                                fieldWithPath("result.bestReviews[].programName").type(JsonFieldType.STRING).description("프로그램 이름"),
                                 fieldWithPath("result.bestReviews[].userName").type(JsonFieldType.STRING).description("리뷰 작성자"),
                                 fieldWithPath("result.bestReviews[].title").type(JsonFieldType.STRING).description("리뷰 제목"),
                                 fieldWithPath("result.bestReviews[].content").type(JsonFieldType.STRING).description("리뷰 내용"),
