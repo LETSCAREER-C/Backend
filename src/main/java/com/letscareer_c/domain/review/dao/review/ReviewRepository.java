@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRepositoryCustom {
@@ -21,7 +22,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long>, ReviewRep
 
 
     @Query("SELECT AVG(r.grade) FROM Review r WHERE r.program.id = :programId")
-    Double findAverageGradeByProgramId(Long programId);
+    Optional<Double> findAverageGradeByProgramId(Long programId);
 
 
     long countByProgramId(Long programId);

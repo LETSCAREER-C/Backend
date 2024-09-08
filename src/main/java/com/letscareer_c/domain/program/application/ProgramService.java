@@ -43,6 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -154,7 +155,10 @@ public class ProgramService {
                     .toList();
 
             // 리뷰 총 개수와 평균
-            double gradeAverage = reviewRepository.findAverageGradeByProgramId(programId);
+            Optional<Double> optionalGradeAverage = reviewRepository.findAverageGradeByProgramId(programId);
+
+            double gradeAverage = optionalGradeAverage.orElse(0.0);
+            gradeAverage = Math.round(gradeAverage * 100.0) / 100.0;
             gradeAverage = Math.round(gradeAverage * 100.0) / 100.0;
             long reviewCount = reviewRepository.countByProgramId(programId);
 
