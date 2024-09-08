@@ -199,7 +199,7 @@ public class ProgramService {
                     .pcMainImageUrl(program.getPcMainImageUrl())
                     .mobileMainImageUrl(program.getMobileMainImageUrl())
                     .description(description)
-                    .hooking(hooking)
+//                    .hooking(hooking)
                     .lecturer(lecturerDto)
                     .curriculum(curriculumList)
                     .latestReviews(latestReviews)
