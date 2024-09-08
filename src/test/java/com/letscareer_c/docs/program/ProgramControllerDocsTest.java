@@ -579,7 +579,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .pcMainImageUrl("https://main-image.com")
                         .mobileMainImageUrl("https://main-image.com")
                         .description(descriptionDtoList)
-                        .hooking(hookingDtoList)
+//                        .hooking(hookingDtoList)
                         .lecturer(lecturerDto)
                         .gradeCount(20)
                         .passedRate(70L)
@@ -613,7 +613,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.pcMainImageUrl").type(JsonFieldType.STRING).description("PC 메인 이미지 URL"),
                                 fieldWithPath("result.mobileMainImageUrl").type(JsonFieldType.STRING).description("Mobile 메인 이미지 URL"),
                                 fieldWithPath("result.description").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(Description)"),
-                                fieldWithPath("result.hooking").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(Hooking)"),
+//                                fieldWithPath("result.hooking").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(Hooking)"),
                                 fieldWithPath("result.lecturer").type(JsonFieldType.OBJECT).description("프로그램 상세 정보(연사 정보)"),
                                 fieldWithPath("result.curriculum").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(커리큘럼)"),
                                 fieldWithPath("result.latestReviews").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(최신 리뷰)"),
@@ -621,14 +621,14 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.recommendedPrograms").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(추천 강좌)"),
                                 fieldWithPath("result.faq").type(JsonFieldType.ARRAY).description("프로그램 상세 정보(FAQ)"),
 
-                                fieldWithPath("result.hooking[].title").type(JsonFieldType.STRING).description("Hooking 제목"),
-                                fieldWithPath("result.hooking[].preTitle").type(JsonFieldType.STRING).description("Hooking 서브 제목"),
-                                fieldWithPath("result.hooking[].tagTitle").type(JsonFieldType.STRING).description("Hooking 태그 제목"),
-                                fieldWithPath("result.hooking[].content").type(JsonFieldType.STRING).description("Hooking 내용"),
-                                fieldWithPath("result.hooking[].order").type(JsonFieldType.NUMBER).description("Hooking 순서"),
-                                fieldWithPath("result.hooking[].templateType").type(JsonFieldType.STRING).description("Hooking 템플릿 타입"),
-                                fieldWithPath("result.hooking[].hookingImageList[].imageUrl").type(JsonFieldType.STRING).description("Hooking 이미지 URL"),
-                                fieldWithPath("result.hooking[].hookingImageList[].order").type(JsonFieldType.NUMBER).description("Hooking 이미지 순서"),
+//                                fieldWithPath("result.hooking[].title").type(JsonFieldType.STRING).description("Hooking 제목"),
+//                                fieldWithPath("result.hooking[].preTitle").type(JsonFieldType.STRING).description("Hooking 서브 제목"),
+//                                fieldWithPath("result.hooking[].tagTitle").type(JsonFieldType.STRING).description("Hooking 태그 제목"),
+//                                fieldWithPath("result.hooking[].content").type(JsonFieldType.STRING).description("Hooking 내용"),
+//                                fieldWithPath("result.hooking[].order").type(JsonFieldType.NUMBER).description("Hooking 순서"),
+//                                fieldWithPath("result.hooking[].templateType").type(JsonFieldType.STRING).description("Hooking 템플릿 타입"),
+//                                fieldWithPath("result.hooking[].hookingImageList[].imageUrl").type(JsonFieldType.STRING).description("Hooking 이미지 URL"),
+//                                fieldWithPath("result.hooking[].hookingImageList[].order").type(JsonFieldType.NUMBER).description("Hooking 이미지 순서"),
 
                                 fieldWithPath("result.description[].title").type(JsonFieldType.STRING).description("Description 제목"),
                                 fieldWithPath("result.description[].content").type(JsonFieldType.STRING).description("Description 내용"),
