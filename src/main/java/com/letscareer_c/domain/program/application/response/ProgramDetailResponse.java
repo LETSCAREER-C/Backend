@@ -25,7 +25,7 @@ public class ProgramDetailResponse {
     private String pcMainImageUrl;
     private String mobileMainImageUrl;
     // programDetail 넣어야함
-//    private List<Object> hooking;
+    private List<Object> hooking;
     private List<Object> description;
     private LecturerDto lecturer;
     private List<CurriculumDto> curriculum;
