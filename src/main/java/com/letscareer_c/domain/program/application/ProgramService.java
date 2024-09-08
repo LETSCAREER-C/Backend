@@ -153,6 +153,11 @@ public class ProgramService {
                     .map(ReviewConverter::toReviewDto)
                     .toList();
 
+            // 리뷰 총 개수와 평균
+            double gradeAverage = reviewRepository.findAverageGradeByProgramId(programId);
+            gradeAverage = Math.round(gradeAverage * 100.0) / 100.0;
+            long reviewCount = reviewRepository.countByProgramId(programId);
+
             // 연사 정보
             LecturerDto lecturerDto = LecturerConverter.toLecturerDto(lecturerRepository.findById(programId)
                     .orElseThrow(() -> new IllegalArgumentException("해당 프로그램에 연결된 연사가 존재하지 않습니다.")));
@@ -183,7 +188,8 @@ public class ProgramService {
                     .stream()
                     .map(DescriptionConverter::toDescriptionDto)
                     .toList();
-
+            //합격률
+            Long passedRate = (long) (((double) program.getPassedNum() / (program.getPassedNum() + program.getFailedNum())) * 100);
 
             return ProgramDetailResponse.builder()
                     .title(program.getTitle())
@@ -197,6 +203,9 @@ public class ProgramService {
                     .lecturer(lecturerDto)
                     .curriculum(curriculumList)
                     .latestReviews(latestReviews)
+                    .passedRate(passedRate)
+                    .gradeCount((int)reviewCount)
+                    .gradeAverage(gradeAverage)
                     .bestReviews(bestReviews)
                     .recommendedPrograms(recommendedPrograms)
                     .faq(faqList)
