@@ -116,8 +116,8 @@ class ProgramServiceTest {
 
         AssertionsForClassTypes.assertThat(response.getMobileMainImageUrl()).isNotNull();
 
-//        AssertionsForClassTypes.assertThat(response.getHooking()).isNotNull();
-//        AssertionsForClassTypes.assertThat(response.getHooking().size()).isEqualTo(5);
+        AssertionsForClassTypes.assertThat(response.getHooking()).isNotNull();
+        AssertionsForClassTypes.assertThat(response.getHooking().size()).isEqualTo(5);
 
         AssertionsForClassTypes.assertThat(response.getDescription()).isNotNull();
         AssertionsForClassTypes.assertThat(response.getDescription().size()).isEqualTo(6);
