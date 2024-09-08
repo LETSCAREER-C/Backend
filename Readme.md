@@ -52,5 +52,39 @@
 | RESTDocs                | API 명세서 작성을 위해 사용                                                                                                                                                                           |
 
 
-## 4. API 명세서
+## 4. 부하 테스트
+렛츠커리어에 들어오는 고객들은 공통적으로 프로그램 리스트 페이지를 보게됩니다.</br>
+해당 API에 대해 부하 테스트를 진행했습니다. 
+
+**Server spec**
+SpringBoot : 3.3.2
+EC2 : t2.micro
+RDS : t3.micro
+
+**Test tool**
+k6 : v0.50.0
+
+| **100명의 유저가 1초동안 최대 요청** | **30초 동안 최대 350명이 랜덤하게 요청을 보냄** |
+| --- | --- |
+|![100vus_1s](https://github.com/user-attachments/assets/82971f83-5ce0-4d7c-a17a-c2427d23896b) |![30s_vus350](https://github.com/user-attachments/assets/0aafcc43-e310-445f-8d0b-6ec2e181f276)  |
+| **응답 시간** </br> 최대 : 780.87ms </br> 최소 : 39.6ms </br> 평균 : 269.59ms </br> **초당 처리량 (throughput)** : 313.459174 | **응답 시간** </br> 최대 : 3.12s </br> 최소 : 20.13ms </br>평균 : 1.05s </br> **초당 처리량 (throughput)** : 237.66414 |
+
+구글 리서치에 따르면 응답시간이 5s를 넘어가면 90% 이상의 유저가 이탈합니다. </br>
+응답을 받을 때 까지 5s가 걸리는지 확인하기 위해 테스트를 진행했습니다.
+
+| **350명의 유저가 1초동안 최대 요청** |
+| --- |
+|![350vus_1s_5s](https://github.com/user-attachments/assets/58a29124-ba6c-4b5f-8f98-962083f180b2)|
+| **checks**가 100% 로 모든 요청이 5s 이내임을 확인. |
+
+| **360명의 유저가 1초동안 최대 요청** | **361명의 유저가 1초동안 최대 요청** |
+| --- | --- |
+|![image](https://github.com/user-attachments/assets/ba9fb686-b35f-4a42-a3ef-e9abd7398d07)  |![image](https://github.com/user-attachments/assets/97e67f90-86b8-4029-a3fc-2e188434e253)  |
+| 실패율 : 0.00%  | 실패율: 0.32 % |
+
+-> 임계 부하는 초당 361명이 최대요청
+
+
+## 5. API 명세서
 https://letmec.p-e.kr/docs/index.html
+
