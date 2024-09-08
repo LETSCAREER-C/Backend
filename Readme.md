@@ -1,16 +1,6 @@
-권장내용
-기획 배경 및 솔루션, 서비스 타겟, BM 등 기획 내용에 대해 자유롭게 구성
-# Letscareer Backend
+# Letscareer C Tech
 
-## 1️⃣ 기획 배경
-
-## 2️⃣ 솔루션
-
-## 3️⃣ 서비스 타겟
-
-## 4️⃣ BM
-
-## 5️⃣ 시스템 아키텍쳐
+## 1. 시스템 아키텍쳐
 ### 📄요구사항
 
 ![_letscareer drawio](https://github.com/user-attachments/assets/b6fda7e3-f39e-4477-99de-3a7c2ed4a613)
@@ -23,10 +13,10 @@
    - Route53과 Nginx , Certbot을 사용해 HTTPS 적용
   
 
-## 6️⃣ ERD
+## 2. ERD
 ![letscareer_erd](https://github.com/user-attachments/assets/1cb569cd-1514-40aa-aefc-38d92c5498c5)
 
-## 7️⃣ 사용 스택
+## 3. 사용 스택
 | 사용 기술                   | 도입 이유                                                                                                                                                                                       |
 |-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | Github Actions          | - 지속적인 통합/지속적인 배포 (CI/CD) 구축을 통해 효율적이고 일관된 배포 및 테스트 프로세스를 구현하고자 함.</br> - 수동으로 배포 및 테스트를 진행하다보니 효율성이 떨어짐</br> - GitHub Actions vs Jenkins</br>⇒ 간편한 설정과 GitHub 통합을 중시하여 GitHub Actions로 결정함 |
@@ -41,4 +31,5 @@
 | RESTDocs                | API 명세서 작성을 위해 사용                                                                                                                                                                           |
 
 
-## 8️⃣ API 명세서
+## 4. API 명세서
+https://letmec.p-e.kr/docs/index.html
