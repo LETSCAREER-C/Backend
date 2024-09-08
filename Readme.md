@@ -27,7 +27,7 @@
 ![_letscareer drawio](https://github.com/user-attachments/assets/b6fda7e3-f39e-4477-99de-3a7c2ed4a613)
 
 1. 성능 최적화
-2. 외부공격대음
+2. 외부공격대응
    - Spring Security를 사용해 기본적인 보안 설정(CSRF, Form Login) 방지
    - 퍼블릭 서브넷과 프라이빗 서브넷을 구분하여 외부에서 접근할 수 있는 서비스와 그렇지 않은 서비스를 구분.
      - RDS의 경우 프라이빗 서브넷에 위치시켜 외부 접속을 막음
@@ -57,12 +57,12 @@
 해당 API에 대해 부하 테스트를 진행했습니다. 
 
 **Server spec**
-SpringBoot : 3.3.2
-EC2 : t2.micro
-RDS : t3.micro
+</br>SpringBoot : 3.3.2
+</br>EC2 : t2.micro
+</br>RDS : t3.micro
 
 **Test tool**
-k6 : v0.50.0
+</br>k6 : v0.50.0
 
 | **100명의 유저가 1초동안 최대 요청** | **30초 동안 최대 350명이 랜덤하게 요청을 보냄** |
 | --- | --- |
