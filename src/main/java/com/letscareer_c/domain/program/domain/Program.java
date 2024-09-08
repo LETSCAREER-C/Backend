@@ -58,11 +58,10 @@ public abstract class Program {
     private int price; // 가격
     private int priceType;  // 가격 타입 ( 0: 무료, 1: 유료 )
     private int discountAmount; // 할인 금액
-
-    //TODO: 후기, FAQ, 상세설명 필드 추가 시, LAZY로 설정하여 프로그램 리스팅에서 성능 최적화
-
     private String pcMainImageUrl; // PC 메인 이미지
     private String mobileMainImageUrl; // 모바일 메인 이미지
+    private int passedNum; //합격자 수
+    private int failedNum; //불합격자 수
 
     @OneToOne(mappedBy = "program")
     private Lecturer lecturer; // 강사 정보

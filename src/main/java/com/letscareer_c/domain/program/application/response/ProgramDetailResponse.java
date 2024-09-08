@@ -33,4 +33,7 @@ public class ProgramDetailResponse {
     private List<ReviewDto> bestReviews;
     private List<RecommendedProgramDto> recommendedPrograms;
     private List<FaqDto> faq;
+    private Long passedRate; //합격률
+    private Double gradeAverage; //별점 평균
+    private int gradeCount; //별점 총 건수
 }

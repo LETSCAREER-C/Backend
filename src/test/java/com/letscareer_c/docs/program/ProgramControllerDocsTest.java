@@ -581,6 +581,9 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .description(descriptionDtoList)
                         .hooking(hookingDtoList)
                         .lecturer(lecturerDto)
+                        .gradeCount(20)
+                        .passedRate(70L)
+                        .gradeAverage(4D)
                         .curriculum(curriculumDtoList)
                         .latestReviews(latestReviews)
                         .bestReviews(bestReviews)
@@ -684,7 +687,11 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
                                 fieldWithPath("result.faq[].order").type(JsonFieldType.NUMBER).description("FAQ 순서"),
                                 fieldWithPath("result.faq[].question").type(JsonFieldType.STRING).description("FAQ 질문"),
-                                fieldWithPath("result.faq[].answer").type(JsonFieldType.STRING).description("FAQ 답변")
+                                fieldWithPath("result.faq[].answer").type(JsonFieldType.STRING).description("FAQ 답변"),
+
+                                fieldWithPath("result.gradeAverage").type(JsonFieldType.NUMBER).description("별점 평균"),
+                                fieldWithPath("result.gradeCount").type(JsonFieldType.NUMBER).description("리뷰 총 개수"),
+                                fieldWithPath("result.passedRate").type(JsonFieldType.NUMBER).description("합격률")
                         )
                 ));
     }
