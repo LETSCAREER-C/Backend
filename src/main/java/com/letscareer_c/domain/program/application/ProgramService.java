@@ -116,7 +116,7 @@ public class ProgramService {
 //                        otDate = p.getOtDate(); // Assuming getOtDate() is a method in Challenge class
 //                    }
                     long deadline = ChronoUnit.DAYS.between(LocalDateTime.now().toLocalDate(), p.getRecruitEndDate().toLocalDate()) == 0 ? 1L : ChronoUnit.DAYS.between(LocalDateTime.now().toLocalDate(), p.getRecruitEndDate().toLocalDate());
-                    deadline = (deadline == 0L) ? 1L : deadline;
+                    deadline = Math.max(deadline, 1L);
                     return new ProgramDto(
                             p.getDtype(),
                             p.getId(),
