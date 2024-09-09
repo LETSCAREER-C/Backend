@@ -15,6 +15,8 @@ public class DescriptionImage extends BaseEntity {
 
     private String imageUrl;
 
+    private String pcImageUrl;
+
     @NotNull
     private int orderNumber;
 

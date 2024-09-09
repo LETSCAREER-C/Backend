@@ -381,15 +381,18 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .templateType("blue")
                         .hookingImageList(List.of(
                                 HookingImageDto.builder()
-                                        .imageUrl("Hooking 1 Image 1")
+                                        .imageUrl("Hooking 1 Mobile Image 1")
+                                        .pcImageUrl("Hooking 1 PC Image 1")
                                         .order(1)
                                         .build(),
                                 HookingImageDto.builder()
-                                        .imageUrl("Hooking 1 Image 2")
+                                        .imageUrl("Hooking 1 Mobile Image 2")
+                                        .pcImageUrl("Hooking 1 PC Image 2")
                                         .order(2)
                                         .build(),
                                 HookingImageDto.builder()
-                                        .imageUrl("Hooking 1 Image 3")
+                                        .imageUrl("Hooking 1 Mobile Image 3")
+                                        .pcImageUrl("Hooking 1 PC Image 3")
                                         .order(3)
                                         .build()
                         ))
@@ -423,15 +426,18 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .templateType("blue")
                         .descriptionImages(List.of(
                                 DescriptionImageDto.builder()
-                                        .imageUrl("Description 1 Image 1")
+                                        .imageUrl("Description 1 Mobile Image 1")
+                                        .pcImageUrl("Description 1 PC Image 1")
                                         .order(1)
                                         .build(),
                                 DescriptionImageDto.builder()
-                                        .imageUrl("Description 1 Image 2")
+                                        .imageUrl("Description 1 Mobile Image 2")
+                                        .pcImageUrl("Description 1 PC Image 2")
                                         .order(2)
                                         .build(),
                                 DescriptionImageDto.builder()
-                                        .imageUrl("Description 1 Image 3")
+                                        .imageUrl("Description 1 Mobile Image 3")
+                                        .pcImageUrl("Description 1 PC Image 3")
                                         .order(3)
                                         .build()
                         ))
@@ -463,15 +469,18 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .templateType("blue")
                         .descriptionImages(List.of(
                                 DescriptionImageDto.builder()
-                                        .imageUrl("Description 2 Image 1")
+                                        .imageUrl("Description 2 Mobile Image 1")
+                                        .pcImageUrl("Description 2 PC Image 1")
                                         .order(1)
                                         .build(),
                                 DescriptionImageDto.builder()
-                                        .imageUrl("Description 2 Image 2")
+                                        .imageUrl("Description 2 Mobile Image 2")
+                                        .pcImageUrl("Description 2 PC Image 2")
                                         .order(2)
                                         .build(),
                                 DescriptionImageDto.builder()
-                                        .imageUrl("Description 2 Image 3")
+                                        .imageUrl("Description 2 Mobile Image 3")
+                                        .pcImageUrl("Description 2 PC Image 3")
                                         .order(3)
                                         .build()
                         ))
@@ -627,7 +636,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.hooking[].content").type(JsonFieldType.STRING).description("Hooking 내용"),
                                 fieldWithPath("result.hooking[].order").type(JsonFieldType.NUMBER).description("Hooking 순서"),
                                 fieldWithPath("result.hooking[].templateType").type(JsonFieldType.STRING).description("Hooking 템플릿 타입"),
-                                fieldWithPath("result.hooking[].hookingImageList[].imageUrl").type(JsonFieldType.STRING).description("Hooking 이미지 URL"),
+                                fieldWithPath("result.hooking[].hookingImageList[].imageUrl").type(JsonFieldType.STRING).description("Hooking 모바일 이미지 URL"),
+                                fieldWithPath("result.hooking[].hookingImageList[].pcImageUrl").type(JsonFieldType.STRING).description("Hooking PC 이미지 URL"),
                                 fieldWithPath("result.hooking[].hookingImageList[].order").type(JsonFieldType.NUMBER).description("Hooking 이미지 순서"),
 
                                 fieldWithPath("result.description[].title").type(JsonFieldType.STRING).description("Description 제목"),
@@ -636,7 +646,8 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("result.description[].hashtags[].hashtag").type(JsonFieldType.STRING).description("Description 해시태그"),
                                 fieldWithPath("result.description[].hashtags[].order").type(JsonFieldType.NUMBER).description("해시태그 순서"),
                                 fieldWithPath("result.description[].templateType").type(JsonFieldType.STRING).description("Description 템플릿 타입"),
-                                fieldWithPath("result.description[].descriptionImages[].imageUrl").type(JsonFieldType.STRING).description("Description 이미지 URL"),
+                                fieldWithPath("result.description[].descriptionImages[].imageUrl").type(JsonFieldType.STRING).description("Description 모바일 이미지 URL"),
+                                fieldWithPath("result.description[].descriptionImages[].pcImageUrl").type(JsonFieldType.STRING).description("Description PC 이미지 URL"),
                                 fieldWithPath("result.description[].descriptionImages[].order").type(JsonFieldType.NUMBER).description("Description 이미지 순서"),
 
 

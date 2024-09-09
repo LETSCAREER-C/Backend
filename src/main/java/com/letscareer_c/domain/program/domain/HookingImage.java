@@ -13,6 +13,9 @@ public class HookingImage extends BaseEntity {
     private Long id;
 
     private String imageUrl;
+
+    private String pcImageUrl;
+
     private int orderNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)

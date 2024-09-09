@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class DescriptionImageDto {
     private String imageUrl;
+    private String pcImageUrl;
     private int order;
 }

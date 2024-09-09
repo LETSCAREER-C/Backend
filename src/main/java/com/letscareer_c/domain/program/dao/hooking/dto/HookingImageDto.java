@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class HookingImageDto {
     private String imageUrl;
+    private String pcImageUrl;
     private int order;
 }

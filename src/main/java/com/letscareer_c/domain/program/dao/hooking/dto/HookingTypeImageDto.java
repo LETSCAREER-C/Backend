@@ -11,5 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class HookingTypeImageDto { // templateType이 image인 경우
     private String imageUrl;
+    private String pcImageUrl;
     private String templateType;
 }

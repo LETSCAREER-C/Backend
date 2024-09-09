@@ -20,6 +20,8 @@ public class Hooking extends BaseEntity {
 
     private String imageUrl;
 
+    private String pcImageUrl;
+
     private String preTitle;
 
     private String tagTitle;

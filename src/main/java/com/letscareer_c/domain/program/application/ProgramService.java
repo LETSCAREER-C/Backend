@@ -115,7 +115,8 @@ public class ProgramService {
 //                    if (p.getDtype().equals(ProgramTypeEnum.CHALLENGE)) {
 //                        otDate = p.getOtDate(); // Assuming getOtDate() is a method in Challenge class
 //                    }
-
+                    long deadline = ChronoUnit.DAYS.between(LocalDateTime.now().toLocalDate(), p.getRecruitEndDate().toLocalDate()) == 0 ? 1L : ChronoUnit.DAYS.between(LocalDateTime.now().toLocalDate(), p.getRecruitEndDate().toLocalDate());
+                    deadline = (deadline == 0) ? 1L : deadline;
                     return new ProgramDto(
                             p.getDtype(),
                             p.getId(),
@@ -128,7 +129,7 @@ public class ProgramService {
                             p.getRecruitEndDate(),
                             p.getProgramStartDate(),
                             p.getProgramEndDate(),
-                            ChronoUnit.DAYS.between(LocalDateTime.now().toLocalDate(), p.getRecruitEndDate().toLocalDate())
+                            deadline
                     );
                 })
                 .collect(Collectors.toList());

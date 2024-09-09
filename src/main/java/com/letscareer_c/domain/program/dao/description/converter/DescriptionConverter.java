@@ -14,6 +14,7 @@ public class DescriptionConverter {
                 return DescriptionTypeImageDto.builder()
                         .templateType(description.getTemplateType())
                         .imageUrl(description.getImageUrl())
+                        .pcImageUrl(description.getPcImageUrl())
                         .build();
             } else {
                 return DescriptionDto.builder()

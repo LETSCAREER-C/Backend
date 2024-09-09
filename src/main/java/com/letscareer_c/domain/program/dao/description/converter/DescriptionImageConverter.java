@@ -7,6 +7,7 @@ public class DescriptionImageConverter {
     public static DescriptionImageDto toDescriptionImageDto(DescriptionImage descriptionImage) {
         return DescriptionImageDto.builder()
                 .imageUrl(descriptionImage.getImageUrl())
+                .pcImageUrl(descriptionImage.getPcImageUrl())
                 .order(descriptionImage.getOrderNumber())
                 .build();
     }

@@ -12,6 +12,7 @@ public class HookingConverter {
             return HookingTypeImageDto.builder()
                     .templateType(hooking.getTemplateType())
                     .imageUrl(hooking.getImageUrl())
+                    .pcImageUrl(hooking.getPcImageUrl())
                     .build();
         } else { // templateType이 image가 아닌 경우, imageUrl, title, content 모두 보내주기
             return HookingDto.builder()
