@@ -69,7 +69,7 @@
 | **100명의 유저가 1초동안 최대 요청** | **30초 동안 최대 350명이 랜덤하게 요청을 보냄** |
 | --- | --- |
 |![100vus_1s](https://github.com/user-attachments/assets/82971f83-5ce0-4d7c-a17a-c2427d23896b) |![30s_vus350](https://github.com/user-attachments/assets/0aafcc43-e310-445f-8d0b-6ec2e181f276)  |
-| **응답 시간** </br> 최대 : 780.87ms </br> 최소 : 39.6ms </br> 평균 : 269.59ms </br> **초당 처리량 (throughput)** : 313.459174 | **응답 시간** </br> 최대 : 3.12s </br> 최소 : 20.13ms </br>평균 : 1.05s </br> **초당 처리량 (throughput)** : 237.66414 |
+| **응답 시간** </br> 최대 : 780.87ms </br> 최소 : 39.6ms </br> 평균 : 269.59ms </br> **초당 처리량 (throughput)** : 313.459174/s | **응답 시간** </br> 최대 : 3.12s </br> 최소 : 20.13ms </br>평균 : 1.05s </br> **초당 처리량 (throughput)** : 237.66414/s |
 
 
 **캐싱 적용 후**
