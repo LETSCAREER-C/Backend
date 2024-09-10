@@ -43,6 +43,7 @@ public class ProgramController {
     /**
      * 프로그램 상세 페이지에서 추천강좌 태그 선택시 추천강좌 리스트 조회 API
      * 커리어태그 기본값 설정하기 .
+     * ㅋㅓ리어태그 쿼리스트링으로 빼기 !
      */
     @GetMapping("/{programId}/recommended/{careerTag}")
     public BaseResponse<RecommendedProgramResponse> getRecommendedProgramsByCareerTag(@PathVariable Long programId , @PathVariable String careerTag) {
@@ -52,8 +53,9 @@ public class ProgramController {
 
     /**
      * 프로그램 전체 후기 조회 API
+     * reveiw -> reviews
      */
-    @GetMapping("/{programId}/review")
+    @GetMapping("/{programId}/reviews")
     public BaseResponse<ReviewListResponse> getProgramReviewList(@PathVariable Long programId) {
         ReviewListResponse response = programService.getReviewList(programId);
         return new BaseResponse<>(response);
