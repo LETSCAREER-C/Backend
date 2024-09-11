@@ -4,8 +4,10 @@ package com.letscareer_c.domain.program.dao;
 import com.letscareer_c.domain.program.domain.Program;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
+import com.letscareer_c.domain.program.domain.tag.RecruitStatus;
 import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.jpa.impl.JPAQuery;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
@@ -36,7 +38,10 @@ public class ProgramRepositoryImpl implements ProgramRepositoryCustom{
                 .selectFrom(program)
                 .where(programTypeEq(programTypeEnums),
                         programCareerTagEq(careerTagEnum)) //동적쿼리로 태그 전체보기 혹은 하나만 선택 해결
-                .orderBy(program.recruitStatus.desc())
+                .orderBy(
+                        program.recruitStatus.desc(), // recruitStatus로 먼저 정렬
+                        program.recruitEndDate.asc() // recruitStatus가 RECRUITING인 경우에만 deadline으로 추가 정렬
+                )
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
