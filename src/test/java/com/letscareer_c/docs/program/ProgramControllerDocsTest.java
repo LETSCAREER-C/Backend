@@ -153,22 +153,30 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 RecommendedProgramDto.builder()
                         .recommendedProgramId(1L)
                         .title("Recommended Program 1")
+                        .dtype(ProgramTypeEnum.LIVECLASS)
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 1 Thumbnail")
                         .intro("Recommended Program 1 Intro")
+                        .recruitStatus(RecruitStatus.RECRUITING)
+                        .recruitStartDate(LocalDate.now())
                         .recruitEndDate(LocalDate.now())
                         .programStartDate(LocalDate.now())
                         .programEndDate(LocalDate.now())
+                        .deadline(3L)
                         .build(),
                 RecommendedProgramDto.builder()
-                        .recommendedProgramId(1L)
+                        .recommendedProgramId(2L)
                         .title("Recommended Program 2")
+                        .dtype(ProgramTypeEnum.LIVECLASS)
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 2 Thumbnail")
                         .intro("Recommended Program 2 Intro")
+                        .recruitStatus(RecruitStatus.RECRUITING)
+                        .recruitStartDate(LocalDate.now())
                         .recruitEndDate(LocalDate.now())
                         .programStartDate(LocalDate.now())
                         .programEndDate(LocalDate.now())
+                        .deadline(3L)
                         .build()
 
         );
@@ -195,12 +203,17 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                                 fieldWithPath("message").description("응답 메시지"),
                                 fieldWithPath("result.recommendedPrograms[].recommendedProgramId").description("추천 프로그램 ID"),
                                 fieldWithPath("result.recommendedPrograms[].tag").description("추천 프로그램 태그"),
+                                fieldWithPath("result.recommendedPrograms[].dtype").description("추천 프로그램 타입"),
                                 fieldWithPath("result.recommendedPrograms[].title").description("추천 프로그램 제목"),
                                 fieldWithPath("result.recommendedPrograms[].intro").description("추천 프로그램 소개"),
                                 fieldWithPath("result.recommendedPrograms[].thumbnail").description("추천 프로그램 썸네일 이미지 URL"),
+                                fieldWithPath("result.recommendedPrograms[].recruitStatus").description("추천 프로그램 모집 상태"),
+                                fieldWithPath("result.recommendedPrograms[].recruitStartDate").description("추천 모집 시작 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].recruitEndDate").description("추천 모집 종료 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].programStartDate").description("추천 프로그램 시작 날짜"),
-                                fieldWithPath("result.recommendedPrograms[].programEndDate").description("추천 프로그램 종료 날짜")
+                                fieldWithPath("result.recommendedPrograms[].programEndDate").description("추천 프로그램 종료 날짜"),
+                                fieldWithPath("result.recommendedPrograms[].deadline").description("추천 프로그램 마감 D-Day")
+
                         )
                 ));
     }
@@ -258,7 +271,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .build()
                 );
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/review", programId)
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/reviews", programId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -351,22 +364,30 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 RecommendedProgramDto.builder()
                         .recommendedProgramId(1L)
                         .title("Recommended Program 1")
+                        .dtype(ProgramTypeEnum.LIVECLASS)
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 1 Thumbnail")
                         .intro("Recommended Program 1 Intro")
+                        .recruitStatus(RecruitStatus.RECRUITING)
+                        .recruitStartDate(LocalDate.now())
                         .recruitEndDate(LocalDate.now())
                         .programStartDate(LocalDate.now())
                         .programEndDate(LocalDate.now())
+                        .deadline(3L)
                         .build(),
                 RecommendedProgramDto.builder()
-                        .recommendedProgramId(1L)
+                        .recommendedProgramId(2L)
                         .title("Recommended Program 2")
+                        .dtype(ProgramTypeEnum.LIVECLASS)
                         .tag(CareerTagEnum.DOCUMENT_PREPARE)
                         .thumbnail("Recommended Program 2 Thumbnail")
                         .intro("Recommended Program 2 Intro")
+                        .recruitStatus(RecruitStatus.RECRUITING)
+                        .recruitStartDate(LocalDate.now())
                         .recruitEndDate(LocalDate.now())
                         .programStartDate(LocalDate.now())
                         .programEndDate(LocalDate.now())
+                        .deadline(3L)
                         .build()
 
         );
@@ -689,12 +710,16 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
 
                                 fieldWithPath("result.recommendedPrograms[].recommendedProgramId").type(JsonFieldType.NUMBER).description("추천 프로그램 ID"),
                                 fieldWithPath("result.recommendedPrograms[].tag").type(JsonFieldType.STRING).description("추천 프로그램 태그"),
+                                fieldWithPath("result.recommendedPrograms[].dtype").type(JsonFieldType.STRING).description("추천 프로그램 타입"),
                                 fieldWithPath("result.recommendedPrograms[].title").type(JsonFieldType.STRING).description("추천 프로그램 제목"),
                                 fieldWithPath("result.recommendedPrograms[].intro").type(JsonFieldType.STRING).description("추천 프로그램 소개"),
                                 fieldWithPath("result.recommendedPrograms[].thumbnail").type(JsonFieldType.STRING).description("추천 프로그램 썸네일"),
+                                fieldWithPath("result.recommendedPrograms[].recruitStatus").type(JsonFieldType.STRING).description("추천 프로그램 모집 상태"),
+                                fieldWithPath("result.recommendedPrograms[].recruitStartDate").type(JsonFieldType.ARRAY).description("추천 프로그램 모집 시작 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].recruitEndDate").type(JsonFieldType.ARRAY).description("추천 프로그램 모집 종료 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].programStartDate").type(JsonFieldType.ARRAY).description("추천 프로그램 시작 날짜"),
                                 fieldWithPath("result.recommendedPrograms[].programEndDate").type(JsonFieldType.ARRAY).description("추천 프로그램 종료 날짜"),
+                                fieldWithPath("result.recommendedPrograms[].deadline").type(JsonFieldType.NUMBER).description("추천 프로그램 마감 D-Day"),
 
                                 fieldWithPath("result.faq[].order").type(JsonFieldType.NUMBER).description("FAQ 순서"),
                                 fieldWithPath("result.faq[].question").type(JsonFieldType.STRING).description("FAQ 질문"),

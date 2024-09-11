@@ -147,6 +147,8 @@ public class ProgramService {
             Program program = programRepository.findById(programId)
                     .orElseThrow(() -> new EntityNotFoundException("programId에 해당하는 프로그램이 존재하지 않습니다."));
 
+            // detail 정보 가져오는거 따로 빼기 (메서드)
+
             // 최신순 리뷰 3개
             List<ReviewDto> latestReviews = reviewRepository.findTop3ByProgramIdOrderByCreatedAtDesc(programId)
                     .stream()
@@ -189,7 +191,7 @@ public class ProgramService {
             // 프로그램 상세 정보 (후킹)
             List<Object> hooking = hookingRepository.findByProgramId(programId)
                     .stream()
-                    .map(HookingConverter::toHookingDto)
+                    .map(HookingConverter::toHookingDto) // 오타
                     .toList();
 
             // 프로그램 상세 정보 (디테일)
@@ -200,6 +202,10 @@ public class ProgramService {
             //합격률
             Long passedRate = (long) (((double) program.getPassedNum() / (program.getPassedNum() + program.getFailedNum())) * 100);
 
+            // 컨버터로 바꾸기!
+            // 굳이..
+            // 생성자로 써도 될듯
+            // 잘 모름
             return ProgramDetailResponse.builder()
                     .title(program.getTitle())
                     .recruitEndDate(program.getRecruitEndDate())
@@ -221,6 +227,8 @@ public class ProgramService {
                     .build();
         } catch (Exception e) {
             log.error("프로그램 상세 조회 중 오류 발생", e);
+            // 에러를 좀 더 광범위하게 해야함
+            // 디테일 업슴 이런 느낌~
             throw new ProgramException(ProgramExceptionErrorCode.PROGRAM_NOT_FOUND);
         }
     }
