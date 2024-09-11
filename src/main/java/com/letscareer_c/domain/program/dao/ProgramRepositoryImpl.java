@@ -36,6 +36,7 @@ public class ProgramRepositoryImpl implements ProgramRepositoryCustom{
                 .selectFrom(program)
                 .where(programTypeEq(programTypeEnums),
                         programCareerTagEq(careerTagEnum)) //동적쿼리로 태그 전체보기 혹은 하나만 선택 해결
+                .orderBy(program.recruitStatus.desc())
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
