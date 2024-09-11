@@ -39,7 +39,7 @@ public class RedisCacheConfig {
                 .serializeValuesWith(
                         RedisSerializationContext.SerializationPair.fromSerializer(
                                 new Jackson2JsonRedisSerializer<>(objectMapper, ProgramListResponse.class)))
-                .entryTtl(Duration.ofDays(7L));
+                .entryTtl(Duration.ofMinutes(5L));
 
         return RedisCacheManager
                 .RedisCacheManagerBuilder
