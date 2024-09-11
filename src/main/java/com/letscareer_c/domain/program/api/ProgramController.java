@@ -55,7 +55,7 @@ public class ProgramController {
      * 프로그램 전체 후기 조회 API
      * reveiw -> reviews
      */
-    @GetMapping("/{programId}/reviews")
+    @GetMapping("/{programId}/review")
     public BaseResponse<ReviewListResponse> getProgramReviewList(@PathVariable Long programId) {
         ReviewListResponse response = programService.getReviewList(programId);
         return new BaseResponse<>(response);

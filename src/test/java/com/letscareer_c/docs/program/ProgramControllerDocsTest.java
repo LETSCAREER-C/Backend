@@ -271,7 +271,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .build()
                 );
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/reviews", programId)
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/review", programId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
