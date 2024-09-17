@@ -144,100 +144,136 @@ public class ProgramService {
     public ProgramDetailResponse getProgramDetail(Long programId) {
 
         try {
-            Program program = programRepository.findById(programId)
-                    .orElseThrow(() -> new EntityNotFoundException("programId에 해당하는 프로그램이 존재하지 않습니다."));
+            Program program = getProgramByProgramId(programId);
 
-            // detail 정보 가져오는거 따로 빼기 (메서드)
+            List<ReviewDto> latestReviews = getLatestReviews(programId);
+            List<ReviewDto> bestReviews = getBestReviews(programId);
 
-            // 최신순 리뷰 3개
-            List<ReviewDto> latestReviews = reviewRepository.findTop3ByProgramIdOrderByCreatedAtDesc(programId)
-                    .stream()
-                    .map(ReviewConverter::toReviewDto)
-                    .toList();
+            double gradeAverage = getGradeAverage(programId);
+            long reviewCount = getReviewCount(programId);
 
-            // 평점순 리뷰 3개
-            List<ReviewDto> bestReviews = reviewRepository.findTop3ByProgramIdOrderByGradeDesc(programId)
-                    .stream()
-                    .map(ReviewConverter::toReviewDto)
-                    .toList();
+            LecturerDto lecturerDto = getLecturerDto(programId);
+            List<CurriculumDto> curriculumList = getCurriculumList(programId);
+            List<FaqDto> faqList = getFaqList(programId);
 
-            // 리뷰 총 개수와 평균
-            Optional<Double> optionalGradeAverage = reviewRepository.findAverageGradeByProgramId(programId);
-
-            double gradeAverage = optionalGradeAverage.orElse(0.0);
-            gradeAverage = Math.round(gradeAverage * 100.0) / 100.0;
-            gradeAverage = Math.round(gradeAverage * 100.0) / 100.0;
-            long reviewCount = reviewRepository.countByProgramId(programId);
-
-            // 연사 정보
-            LecturerDto lecturerDto = LecturerConverter.toLecturerDto(lecturerRepository.findById(programId)
-                    .orElseThrow(() -> new IllegalArgumentException("해당 프로그램에 연결된 연사가 존재하지 않습니다.")));
-
-            // 커리큘럼 리스트
-            List<CurriculumDto> curriculumList = curriculumRepository.findByProgramId(programId)
-                    .stream()
-                    .map(CurriculumConverter::toCurriculumDto)
-                    .toList();
-
-            // FAQ 리스트
-            List<FaqDto> faqList = faqRepository.findByProgramId(programId)
-                    .stream()
-                    .map(FaqConverter::toFaqDto)
-                    .toList();
-
-            // 추천 강좌
             List<RecommendedProgramDto> recommendedPrograms = getRecommendedProgramsDtosByCareerTag(programId, program.getTag().name());
 
-            // 프로그램 상세 정보 (후킹)
-            List<Object> hooking = hookingRepository.findByProgramId(programId)
-                    .stream()
-                    .map(HookingConverter::toHookingDto) // 오타
-                    .toList();
+            List<Object> hooking = getHookingDetails(programId);
+            List<Object> description = getDescriptionDetails(programId);
 
-            // 프로그램 상세 정보 (디테일)
-            List<Object> description = descriptionRepository.findByProgramId(programId)
-                    .stream()
-                    .map(DescriptionConverter::toDescriptionDto)
-                    .toList();
-            //합격률
-            Long passedRate = (long) (((double) program.getPassedNum() / (program.getPassedNum() + program.getFailedNum())) * 100);
+            Long passedRate = calculatePassedRate(program);
 
-            // 컨버터로 바꾸기!
-            // 굳이..
-            // 생성자로 써도 될듯
-            // 잘 모름
-            return ProgramDetailResponse.builder()
-                    .title(program.getTitle())
-                    .recruitEndDate(program.getRecruitEndDate())
-                    .stepType(program.getTag())
-                    .programType(program.getDtype())
-                    .pcMainImageUrl(program.getPcMainImageUrl())
-                    .mobileMainImageUrl(program.getMobileMainImageUrl())
-                    .description(description)
-                    .hooking(hooking)
-                    .lecturer(lecturerDto)
-                    .curriculum(curriculumList)
-                    .latestReviews(latestReviews)
-                    .passedRate(passedRate)
-                    .gradeCount((int)reviewCount)
-                    .gradeAverage(gradeAverage)
-                    .bestReviews(bestReviews)
-                    .recommendedPrograms(recommendedPrograms)
-                    .faq(faqList)
-                    .build();
+            return new ProgramDetailResponse(
+                    program.getTitle(),
+                    program.getTag(),
+                    program.getDtype(),
+                    program.getRecruitEndDate(),
+                    program.getPcMainImageUrl(),
+                    program.getMobileMainImageUrl(),
+                    hooking,
+                    description,
+                    lecturerDto,
+                    curriculumList,
+                    latestReviews,
+                    bestReviews,
+                    recommendedPrograms,
+                    faqList,
+                    passedRate,
+                    gradeAverage,
+                    (int) reviewCount
+            );
+
         } catch (Exception e) {
-            log.error("프로그램 상세 조회 중 오류 발생", e);
-            // 에러를 좀 더 광범위하게 해야함
-            // 디테일 업슴 이런 느낌~
-            throw new ProgramException(ProgramExceptionErrorCode.PROGRAM_NOT_FOUND);
+            log.error("서버 에러 발생", e);
+            throw new ProgramException(ProgramExceptionErrorCode.SERVER_ERROR);
         }
     }
 
+    private Program getProgramByProgramId(Long programId) {
+        try {
+            return programRepository.findById(programId)
+                    .orElseThrow(() -> new ProgramException(ProgramExceptionErrorCode.PROGRAM_NOT_FOUND));
+        } catch (ProgramException e) {
+            log.error("프로그램 정보 조회 중 오류 발생: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private List<ReviewDto> getLatestReviews(Long programId) {
+        return reviewRepository.findTop3ByProgramIdOrderByCreatedAtDesc(programId)
+                .stream()
+                .map(ReviewConverter::toReviewDto)
+                .toList();
+    }
+
+    private List<ReviewDto> getBestReviews(Long programId) {
+        return reviewRepository.findTop3ByProgramIdOrderByGradeDesc(programId)
+                .stream()
+                .map(ReviewConverter::toReviewDto)
+                .toList();
+    }
+
+    private double getGradeAverage(Long programId) {
+        Optional<Double> optionalGradeAverage = reviewRepository.findAverageGradeByProgramId(programId);
+        double gradeAverage = optionalGradeAverage.orElse(0.0);
+        return Math.round(gradeAverage * 100.0) / 100.0;
+    }
+
+    private long getReviewCount(Long programId) {
+        return reviewRepository.countByProgramId(programId);
+    }
+
+    private LecturerDto getLecturerDto(Long programId) {
+        try {
+            return LecturerConverter.toLecturerDto(
+                    lecturerRepository.findById(programId)
+                            .orElseThrow(() -> new ProgramException(ProgramExceptionErrorCode.LECTURER_NOT_FOUND))
+            );
+        } catch (ProgramException e) {
+            log.error("강사 정보 조회 중 오류 발생: {}", e.getMessage(), e);
+            throw e;
+        }
+    }
+
+    private List<CurriculumDto> getCurriculumList(Long programId) {
+        return curriculumRepository.findByProgramId(programId)
+                .stream()
+                .map(CurriculumConverter::toCurriculumDto)
+                .toList();
+    }
+
+    private List<FaqDto> getFaqList(Long programId) {
+        return faqRepository.findByProgramId(programId)
+                .stream()
+                .map(FaqConverter::toFaqDto)
+                .toList();
+    }
+
+    private List<Object> getHookingDetails(Long programId) {
+        return hookingRepository.findByProgramId(programId)
+                .stream()
+                .map(HookingConverter::toHookingDto)
+                .toList();
+    }
+
+    private List<Object> getDescriptionDetails(Long programId) {
+        return descriptionRepository.findByProgramId(programId)
+                .stream()
+                .map(DescriptionConverter::toDescriptionDto)
+                .toList();
+    }
+
+    private Long calculatePassedRate(Program program) {
+        return (long) (((double) program.getPassedNum() / (program.getPassedNum() + program.getFailedNum())) * 100);
+    }
+
+
     private List<RecommendedProgramDto> getRecommendedProgramsDtosByCareerTag(Long programId, String careerTag) {
+        CareerTagEnum careerTagEnum = returnCareerTagEnum(careerTag);
         return recommendedRepository.findByProgramId(programId)
                 .stream()
                 .map(recommendedProgramConverter::toRecommendedProgramDto)
-                .filter(recommendedProgramDto -> recommendedProgramDto.getTag() == CareerTagEnum.valueOf(careerTag.toUpperCase()))
+                .filter(recommendedProgramDto -> recommendedProgramDto.getTag() == careerTagEnum)
                 .toList();
     }
 
