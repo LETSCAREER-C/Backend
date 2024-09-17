@@ -21,17 +21,15 @@ import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.RecommendedProgramRepository;
 import com.letscareer_c.domain.program.dao.recommendedProgram.converter.RecommendedProgramConverter;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
-import com.letscareer_c.domain.program.domain.RecommendedProgram;
-import com.letscareer_c.domain.review.application.response.ReviewListResponse;
-import com.letscareer_c.domain.review.dao.review.ReviewRepository;
-import com.letscareer_c.domain.review.dao.review.converter.ReviewConverter;
-import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.Program;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.exception.ProgramException;
 import com.letscareer_c.domain.program.exception.errorcode.ProgramExceptionErrorCode;
-import jakarta.persistence.EntityNotFoundException;
+import com.letscareer_c.domain.review.application.response.ReviewListResponse;
+import com.letscareer_c.domain.review.dao.review.ReviewRepository;
+import com.letscareer_c.domain.review.dao.review.converter.ReviewConverter;
+import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
@@ -152,7 +150,7 @@ public class ProgramService {
             double gradeAverage = getGradeAverage(programId);
             long reviewCount = getReviewCount(programId);
 
-            LecturerDto lecturerDto = getLecturerDto(programId);
+            LecturerDto lecturerDto = getLecturerDto(program, programId);
             List<CurriculumDto> curriculumList = getCurriculumList(programId);
             List<FaqDto> faqList = getFaqList(programId);
 
@@ -163,13 +161,7 @@ public class ProgramService {
 
             Long passedRate = calculatePassedRate(program);
 
-            return new ProgramDetailResponse(
-                    program.getTitle(),
-                    program.getTag(),
-                    program.getDtype(),
-                    program.getRecruitEndDate(),
-                    program.getPcMainImageUrl(),
-                    program.getMobileMainImageUrl(),
+            return craeteProgramDetailResponse(program,
                     hooking,
                     description,
                     lecturerDto,
@@ -180,13 +172,47 @@ public class ProgramService {
                     faqList,
                     passedRate,
                     gradeAverage,
-                    (int) reviewCount
-            );
-
+                    (int) reviewCount);
+        } catch (ProgramException e) {
+            log.error("프로그램 상세 조회 중 오류 발생: {}", e.getMessage(), e);
+            throw e;
         } catch (Exception e) {
             log.error("서버 에러 발생", e);
             throw new ProgramException(ProgramExceptionErrorCode.SERVER_ERROR);
         }
+    }
+
+    private ProgramDetailResponse craeteProgramDetailResponse(Program program,
+                                                              List<Object> hooking,
+                                                              List<Object> description,
+                                                              LecturerDto lecturerDto,
+                                                              List<CurriculumDto> curriculumList,
+                                                              List<ReviewDto> latestReviews,
+                                                              List<ReviewDto> bestReviews,
+                                                              List<RecommendedProgramDto> recommendedPrograms,
+                                                              List<FaqDto> faqList,
+                                                              Long passedRate,
+                                                              double gradeAverage,
+                                                              int reviewCount) {
+        return new ProgramDetailResponse(
+                program.getTitle(),
+                program.getTag(),
+                program.getDtype(),
+                program.getRecruitEndDate(),
+                program.getPcMainImageUrl(),
+                program.getMobileMainImageUrl(),
+                hooking,
+                description,
+                lecturerDto,
+                curriculumList,
+                latestReviews,
+                bestReviews,
+                recommendedPrograms,
+                faqList,
+                passedRate,
+                gradeAverage,
+                reviewCount
+        );
     }
 
     private Program getProgramByProgramId(Long programId) {
@@ -223,30 +249,49 @@ public class ProgramService {
         return reviewRepository.countByProgramId(programId);
     }
 
-    private LecturerDto getLecturerDto(Long programId) {
-        try {
-            return LecturerConverter.toLecturerDto(
-                    lecturerRepository.findById(programId)
-                            .orElseThrow(() -> new ProgramException(ProgramExceptionErrorCode.LECTURER_NOT_FOUND))
-            );
-        } catch (ProgramException e) {
-            log.error("강사 정보 조회 중 오류 발생: {}", e.getMessage(), e);
-            throw e;
+    private LecturerDto getLecturerDto(Program program, Long programId) {
+        // 프로그램 타입이 챌린지인 경우 Lecture가 없음.
+        if(program.getDtype().toString().equals("CHALLENGE")) {
+            return null;
+        } else {
+            try {
+                return LecturerConverter.toLecturerDto(
+                        lecturerRepository.findById(programId)
+                                .orElseThrow(() -> new ProgramException(ProgramExceptionErrorCode.LECTURER_NOT_FOUND))
+                );
+            } catch (ProgramException e) {
+                log.error("programId = {} 에 해당하는 프로그램의 강사 정보 조회 중 오류 발생: {}", programId, e.getMessage(), e);
+                throw e;
+            }
         }
     }
 
     private List<CurriculumDto> getCurriculumList(Long programId) {
-        return curriculumRepository.findByProgramId(programId)
+
+        List<CurriculumDto> curriculumDtoList = curriculumRepository.findByProgramId(programId)
                 .stream()
                 .map(CurriculumConverter::toCurriculumDto)
                 .toList();
+        if(curriculumDtoList.isEmpty()) {
+            log.error("programId = {} 에 해당하는 프로그램의 커리큘럼을 가져오는데 문제가 발생했습니다.", programId);
+            throw new ProgramException(ProgramExceptionErrorCode.CURRICULUM_NOT_FOUND);
+        } else {
+            return curriculumDtoList;
+        }
     }
 
     private List<FaqDto> getFaqList(Long programId) {
-        return faqRepository.findByProgramId(programId)
-                .stream()
-                .map(FaqConverter::toFaqDto)
-                .toList();
+        List<FaqDto> faqDtos = faqRepository.findByProgramId(programId)
+                    .stream()
+                    .map(FaqConverter::toFaqDto)
+                    .toList();
+
+        if(faqDtos.isEmpty()) {
+            log.error("programId = {} 에 해당하는 프로그램의 FAQ를 가져오는데 문제가 발생했습니다.", programId);
+            throw new ProgramException(ProgramExceptionErrorCode.FAQ_NOT_FOUND);
+        } else {
+            return faqDtos;
+        }
     }
 
     private List<Object> getHookingDetails(Long programId) {
@@ -257,10 +302,16 @@ public class ProgramService {
     }
 
     private List<Object> getDescriptionDetails(Long programId) {
-        return descriptionRepository.findByProgramId(programId)
+        List<Object> programDescriptionDetails =  descriptionRepository.findByProgramId(programId)
                 .stream()
                 .map(DescriptionConverter::toDescriptionDto)
                 .toList();
+        if(programDescriptionDetails.isEmpty()) {
+            log.error("programId = {} 에 해당하는 프로그램의 상세소개를 가져오는데 문제가 발생했습니다.", programId);
+            throw new ProgramException(ProgramExceptionErrorCode.PROGRAM_DESCRIPTION_NOT_FOUND);
+        } else {
+            return programDescriptionDetails;
+        }
     }
 
     private Long calculatePassedRate(Program program) {

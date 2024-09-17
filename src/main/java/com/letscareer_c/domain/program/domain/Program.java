@@ -69,12 +69,15 @@ public abstract class Program {
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Hooking> hooking = new ArrayList<>(); // 프로그램 후킹 정보
 
+    @NotNull
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Description> description = new ArrayList<>(); // 프로그램 상세 정보
 
+    @NotNull
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Curriculum>  curriculum = new ArrayList<>(); // 커리큘럼 정보
 
+    @NotNull
     @OneToMany(mappedBy = "program", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Faq> faq = new ArrayList<>(); // FAQ 정보
 

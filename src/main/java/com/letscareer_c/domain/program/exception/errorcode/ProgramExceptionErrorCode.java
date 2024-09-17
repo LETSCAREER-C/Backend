@@ -16,6 +16,9 @@ public enum ProgramExceptionErrorCode implements ResponseStatus {
     // 존재하지 않는 프로그램 에러 반환
     PROGRAM_NOT_FOUND(4002, HttpStatus.NOT_FOUND.value(), "존재하지 않는 프로그램입니다."),
     LECTURER_NOT_FOUND(4003, HttpStatus.NOT_FOUND.value(), "존재하지 않는 강사입니다."),
+    CURRICULUM_NOT_FOUND(4004, HttpStatus.NOT_FOUND.value(), "커리큘럼이 존재하지 않습니다."),
+    FAQ_NOT_FOUND(4005, HttpStatus.NOT_FOUND.value(), "FAQ가 존재하지 않습니다."),
+    PROGRAM_DESCRIPTION_NOT_FOUND(4006, HttpStatus.NOT_FOUND.value(),"프로그램 상세정보가 존재하지 않습니다."),
     SERVER_ERROR(5000, HttpStatus.INTERNAL_SERVER_ERROR.value(), "서버 에러");
 
     private final int code;
