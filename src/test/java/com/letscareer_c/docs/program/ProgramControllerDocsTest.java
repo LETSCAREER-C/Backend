@@ -16,12 +16,12 @@ import com.letscareer_c.domain.program.dao.hooking.dto.HookingDto;
 import com.letscareer_c.domain.program.dao.hooking.dto.HookingImageDto;
 import com.letscareer_c.domain.program.dao.lecturer.dto.LecturerDto;
 import com.letscareer_c.domain.program.dao.recommendedProgram.dto.RecommendedProgramDto;
-import com.letscareer_c.domain.review.application.response.ReviewListResponse;
-import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import com.letscareer_c.domain.program.domain.ProgramTypeEnum;
 import com.letscareer_c.domain.program.domain.tag.CareerTagEnum;
 import com.letscareer_c.domain.program.domain.tag.EmploymentStatusEnum;
 import com.letscareer_c.domain.program.domain.tag.RecruitStatus;
+import com.letscareer_c.domain.review.application.response.ReviewListResponse;
+import com.letscareer_c.domain.review.dao.review.dto.ReviewDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -189,7 +189,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                 );
 
         //when, then
-        mockMvc.perform(MockMvcRequestBuilders.get("/program/1/recommended/DOCUMENT_PREPARE")
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/1/recommended?careerTag=DOCUMENT_PREPARE")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
@@ -271,7 +271,7 @@ public class ProgramControllerDocsTest extends RestDocsSupport{
                         .build()
                 );
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/review", programId)
+        mockMvc.perform(MockMvcRequestBuilders.get("/program/{programId}/reviews", programId)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isOk())
