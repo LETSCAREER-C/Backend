@@ -42,6 +42,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -57,8 +58,18 @@ public class ProgramService {
     private final RecommendedProgramRepository recommendedRepository;
     private final RecommendedProgramConverter recommendedProgramConverter;
     private final CurriculumRepository curriculumRepository;
+    private AtomicInteger cacheVersion = new AtomicInteger(1);
 
-    @Cacheable(cacheNames = "getProgramList", key = "'programList:careerTag:' + #careerTag + ':programTypes:' + #programTypes + ':page:' + #page")
+    public int getCurrentVersion() {
+        return cacheVersion.get();
+    }
+
+    public void incrementVersion() {
+        cacheVersion.incrementAndGet();
+    }
+
+    @Cacheable(cacheNames = "getProgramList",
+            key = "'programList:careerTag:' + #careerTag + ':programTypes:' + #programTypes + ':v' + @programService.getCurrentVersion() + ':page:' + #page")
     public ProgramListResponse getProgramList(String careerTag, List<String> programTypes, int page) {
         PageRequest pageRequest = PageRequest.of(page,8);
         List<ProgramTypeEnum> programTypeEnums = returnProgramTypeEnums(programTypes);
